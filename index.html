@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#050505">
 
-  <title>para ti 🖤</title>
+  <title>Para ti ♡</title>
 
   <style>
     * {
@@ -14,805 +13,387 @@
       padding: 0;
     }
 
-    :root {
-      --black: #050505;
-      --white: #f5f5f7;
-      --gray: #a7a7ad;
-
-      /* Rojo perlado */
-      --pearl-red: #d94b64;
-      --pearl-light: #f08a9b;
-      --pearl-dark: #721528;
-    }
-
-    html,
-    body {
-      width: 100%;
-      min-height: 100%;
-      background: var(--black);
-    }
-
     body {
       min-height: 100vh;
-      overflow: hidden;
-
-      color: var(--white);
-
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "SF Pro Display",
-        "SF Pro Text",
-        "Helvetica Neue",
-        Arial,
-        sans-serif;
-
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
+      font-family: Georgia, serif;
+      overflow-x: hidden;
+      color: white;
+      background:
+        radial-gradient(circle at 20% 20%, #5c365e 0%, transparent 35%),
+        radial-gradient(circle at 80% 80%, #30204d 0%, transparent 35%),
+        linear-gradient(135deg, #120d1c, #25152c, #171224);
     }
 
-    /* =========================
-       FONDO
-    ========================= */
-
-    .background {
+    .stars {
       position: fixed;
       inset: 0;
+      pointer-events: none;
       overflow: hidden;
       z-index: 0;
-
-      background:
-        radial-gradient(
-          circle at 50% 50%,
-          #12070a 0%,
-          #070506 42%,
-          #030303 100%
-        );
     }
 
-    .glow {
+    .star {
       position: absolute;
-
-      width: 560px;
-      height: 560px;
-
+      width: 3px;
+      height: 3px;
+      background: white;
       border-radius: 50%;
-
-      filter: blur(125px);
-
-      pointer-events: none;
-
-      transition:
-        transform 2s cubic-bezier(.2,.8,.2,1);
+      opacity: .7;
+      animation: twinkle 3s infinite ease-in-out;
     }
 
-    .glow.one {
-      top: -280px;
-      left: -220px;
-
-      background:
-        radial-gradient(
-          circle,
-          rgba(240,138,155,.65),
-          rgba(217,75,100,.22),
-          transparent 70%
-        );
-
-      opacity: .25;
+    @keyframes twinkle {
+      0%, 100% { opacity: .2; transform: scale(.7); }
+      50% { opacity: 1; transform: scale(1.5); }
     }
 
-    .glow.two {
-      right: -300px;
-      bottom: -300px;
-
-      width: 680px;
-      height: 680px;
-
-      background:
-        radial-gradient(
-          circle,
-          rgba(217,75,100,.50),
-          rgba(114,21,40,.16),
-          transparent 70%
-        );
-
-      opacity: .22;
-    }
-
-    .glow.three {
-      width: 430px;
-      height: 430px;
-
-      left: 40%;
-      top: 42%;
-
-      background:
-        radial-gradient(
-          circle,
-          rgba(240,138,155,.22),
-          transparent 70%
-        );
-
-      opacity: .13;
-    }
-
-    /* =========================
-       TEXTURA
-    ========================= */
-
-    .noise {
-      position: fixed;
-      inset: 0;
-
-      z-index: 2;
-
-      pointer-events: none;
-
-      opacity: .015;
-
-      background-image:
-        radial-gradient(
-          rgba(255,255,255,.8) .5px,
-          transparent .5px
-        );
-
-      background-size: 5px 5px;
-    }
-
-    /* =========================
-       LUZ DEL MOUSE
-    ========================= */
-
-    .cursor-light {
-      position: fixed;
-
-      width: 330px;
-      height: 330px;
-
-      border-radius: 50%;
-
-      transform: translate(-50%, -50%);
-
-      pointer-events: none;
-
-      z-index: 1;
-
-      background:
-        radial-gradient(
-          circle,
-          rgba(240,138,155,.075),
-          transparent 68%
-        );
-    }
-
-    /* =========================
-       CONTENEDOR
-    ========================= */
-
-    .experience {
+    .page {
       position: relative;
-
-      z-index: 5;
-
-      width: 100%;
-      height: 100vh;
-
-      overflow: hidden;
-    }
-
-    /* =========================
-       ESCENAS
-    ========================= */
-
-    .scene {
-      position: absolute;
-      inset: 0;
-
-      width: 100%;
-      height: 100%;
-
+      z-index: 2;
+      min-height: 100vh;
       display: flex;
-      align-items: center;
       justify-content: center;
-
-      padding: 25px;
-
-      opacity: 0;
-
-      pointer-events: none;
-
-      transform:
-        scale(.985)
-        translateY(12px);
-
-      filter: blur(7px);
-
-      transition:
-        opacity .9s cubic-bezier(.2,.8,.2,1),
-        transform 1s cubic-bezier(.2,.8,.2,1),
-        filter 1s cubic-bezier(.2,.8,.2,1);
-    }
-
-    .scene.active {
-      opacity: 1;
-
-      pointer-events: auto;
-
-      transform:
-        scale(1)
-        translateY(0);
-
-      filter: blur(0);
-    }
-
-    /* =========================
-       TEXTO
-    ========================= */
-
-    .text-scene {
-      flex-direction: column;
-      text-align: center;
-    }
-
-    .main-title {
-      max-width: 900px;
-
-      font-size:
-        clamp(39px, 9vw, 78px);
-
-      line-height: 1.02;
-
-      font-weight: 300;
-
-      letter-spacing: -.055em;
-
-      color: #f5f5f7;
-
-      opacity: 0;
-
-      transform: translateY(18px);
-
-      transition:
-        opacity 1s cubic-bezier(.2,.8,.2,1) .15s,
-        transform 1s cubic-bezier(.2,.8,.2,1) .15s;
-    }
-
-    .scene.active .main-title {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* =========================
-       PEQUEÑO REFLEJO ROJO
-    ========================= */
-
-    .red-reflection {
-      width: 42px;
-      height: 2px;
-
-      margin-bottom: 28px;
-
-      border-radius: 999px;
-
-      background:
-        linear-gradient(
-          90deg,
-          transparent,
-          var(--pearl-light),
-          var(--pearl-red),
-          transparent
-        );
-
-      box-shadow:
-        0 0 18px rgba(217,75,100,.45);
-
-      opacity: 0;
-
-      transform:
-        scaleX(.2);
-
-      transition:
-        opacity .9s ease,
-        transform 1s cubic-bezier(.2,.8,.2,1);
-    }
-
-    .scene.active .red-reflection {
-      opacity: .9;
-      transform: scaleX(1);
-    }
-
-    /* =========================
-       TARJETA VIDRIO
-    ========================= */
-
-    .glass-card {
-      width: min(90vw, 580px);
-
-      padding: 48px 34px;
-
-      border:
-        1px solid rgba(255,255,255,.12);
-
-      border-radius: 32px;
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(255,255,255,.065),
-          rgba(255,255,255,.018)
-        );
-
-      backdrop-filter:
-        blur(34px)
-        saturate(125%);
-
-      -webkit-backdrop-filter:
-        blur(34px)
-        saturate(125%);
-
-      box-shadow:
-        0 30px 90px rgba(0,0,0,.48),
-        inset 0 1px 0 rgba(255,255,255,.09);
-
-      text-align: center;
-
-      opacity: 0;
-
-      transform:
-        translateY(18px)
-        scale(.98);
-
-      transition:
-        opacity 1s ease .2s,
-        transform 1s cubic-bezier(.2,.8,.2,1) .2s;
-    }
-
-    .scene.active .glass-card {
-      opacity: 1;
-
-      transform:
-        translateY(0)
-        scale(1);
-    }
-
-    .glass-card h2 {
-      font-size:
-        clamp(30px, 7vw, 48px);
-
-      line-height: 1.05;
-
-      font-weight: 300;
-
-      letter-spacing: -.05em;
-    }
-
-    .small-text {
-      margin-top: 18px;
-
-      font-size: 15px;
-
-      line-height: 1.6;
-
-      color:
-        rgba(245,245,247,.52);
-    }
-
-    /* =========================
-       BOTÓN
-    ========================= */
-
-    .glass-button {
-      margin-top: 30px;
-
-      padding:
-        11px 12px 11px 20px;
-
-      display: inline-flex;
-
       align-items: center;
+      padding: 30px 18px;
+    }
 
-      gap: 14px;
+    .card {
+      width: min(700px, 100%);
+      padding: 35px 25px;
+      border-radius: 28px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 20px 60px rgba(0,0,0,.45);
+      text-align: center;
+      animation: appear 1.2s ease;
+    }
 
-      border:
-        1px solid rgba(255,255,255,.13);
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
 
+    .small {
+      font-size: 14px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      opacity: .7;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(38px, 9vw, 72px);
+      margin-bottom: 15px;
+      font-weight: normal;
+      text-shadow: 0 0 25px rgba(255,180,230,.3);
+    }
+
+    .subtitle {
+      font-size: 18px;
+      line-height: 1.7;
+      opacity: .85;
+      margin-bottom: 30px;
+    }
+
+    .photo {
+      width: min(330px, 90%);
+      height: 330px;
+      object-fit: cover;
+      border-radius: 25px;
+      margin: 10px auto 30px;
+      display: block;
+      border: 2px solid rgba(255,255,255,.25);
+      box-shadow: 0 15px 40px rgba(0,0,0,.4);
+      transition: .5s;
+    }
+
+    .photo:hover {
+      transform: scale(1.03) rotate(-1deg);
+    }
+
+    button {
+      border: none;
+      padding: 14px 25px;
       border-radius: 999px;
-
-      background:
-        rgba(255,255,255,.045);
-
-      color:
-        rgba(255,255,255,.88);
-
-      font-family: inherit;
-      font-size: 15px;
-
       cursor: pointer;
-
-      backdrop-filter:
-        blur(25px);
-
-      -webkit-backdrop-filter:
-        blur(25px);
-
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.08),
-        0 15px 40px rgba(0,0,0,.22);
-
-      transition:
-        background .35s ease,
-        border-color .35s ease,
-        transform .35s ease;
+      color: white;
+      font-size: 16px;
+      background: linear-gradient(135deg, #b45ca5, #7c4d9e);
+      box-shadow: 0 8px 25px rgba(180,92,165,.3);
+      transition: .3s;
+      margin: 7px;
     }
 
-    .glass-button:hover {
-      background:
-        rgba(217,75,100,.10);
-
-      border-color:
-        rgba(240,138,155,.30);
-
-      transform:
-        translateY(-2px);
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(180,92,165,.5);
     }
 
-    .button-arrow {
-      width: 30px;
-      height: 30px;
-
-      display: flex;
-
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 50%;
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(240,138,155,.22),
-          rgba(114,21,40,.14)
-        );
-
-      font-size: 20px;
-    }
-
-    /* =========================
-       TRANSICIÓN
-    ========================= */
-
-    .transition {
-      position: fixed;
-      inset: 0;
-
-      z-index: 50;
-
-      pointer-events: none;
-
+    .letter {
+      max-height: 0;
+      overflow: hidden;
       opacity: 0;
-
-      background:
-        rgba(3,3,3,.10);
-
-      backdrop-filter: blur(0);
-
-      -webkit-backdrop-filter: blur(0);
-
-      transition:
-        opacity .7s ease,
-        backdrop-filter .7s ease;
+      transition: max-height 1s ease, opacity 1s ease, margin 1s ease;
     }
 
-    .transition.active {
+    .letter.open {
+      max-height: 600px;
       opacity: 1;
-
-      backdrop-filter:
-        blur(24px)
-        saturate(90%);
-
-      -webkit-backdrop-filter:
-        blur(24px)
-        saturate(90%);
+      margin-top: 25px;
     }
 
-    /* =========================
-       MÓVIL
-    ========================= */
-
-    @media (max-width: 600px) {
-
-      .scene {
-        padding: 20px;
-      }
-
-      .cursor-light {
-        display: none;
-      }
-
-      .glow {
-        filter: blur(95px);
-      }
-
+    .letter-box {
+      padding: 25px;
+      border-radius: 20px;
+      background: rgba(0,0,0,.18);
+      border: 1px solid rgba(255,255,255,.1);
+      line-height: 1.8;
+      font-size: 17px;
     }
 
+    .typing {
+      min-height: 90px;
+      margin-top: 20px;
+      font-size: 18px;
+      line-height: 1.7;
+      opacity: .9;
+    }
+
+    .heart {
+      position: fixed;
+      pointer-events: none;
+      font-size: 22px;
+      animation: floatHeart 2.5s ease-out forwards;
+      z-index: 10;
+    }
+
+    @keyframes floatHeart {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(.7) rotate(0);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-180px) scale(1.4) rotate(25deg);
+      }
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 13px;
+      opacity: .45;
+    }
+
+    @media (max-width: 500px) {
+      .card {
+        padding: 30px 18px;
+      }
+
+      .photo {
+        height: 270px;
+      }
+
+      .subtitle {
+        font-size: 16px;
+      }
+    }
   </style>
 </head>
 
 <body>
 
-  <div class="background">
+  <div class="stars" id="stars"></div>
 
-    <div class="glow one"></div>
-    <div class="glow two"></div>
-    <div class="glow three"></div>
+  <main class="page">
 
-  </div>
+    <section class="card">
 
-  <div class="cursor-light"></div>
+      <div class="small">un pequeño regalo ♡</div>
 
-  <div class="noise"></div>
+      <h1>Para ti</h1>
 
+      <p class="subtitle">
+        Hice esto porque quería darte algo diferente.
+        Algo pequeño, pero hecho con cariño.
+      </p>
 
-  <main class="experience">
+      <!-- FOTO -->
+      <img src="foto.jpeg" alt="Una foto especial" class="photo">
 
-    <!-- PARTE 1 -->
+      <button onclick="openLetter()">
+        💌 Abrir
+      </button>
 
-    <section
-      class="scene text-scene active"
-      id="scene1"
-    >
+      <button onclick="makeHearts()">
+        ♡ sorpresa
+      </button>
 
-      <div class="red-reflection"></div>
+      <div class="letter" id="letter">
 
-      <h1 class="main-title">
-        Heeeeey vrujinii
-      </h1>
+        <div class="letter-box">
 
-    </section>
+          <p>
+            Hay personas que llegan a tu vida y, sin darte cuenta,
+            terminan siendo importantes.
+          </p>
 
+          <br>
 
-    <!-- PARTE 2 -->
+          <p>
+            No sé exactamente cómo explicar todo lo que quería decir,
+            así que hice esto para que simplemente lo tengas.
+          </p>
 
-    <section
-      class="scene text-scene"
-      id="scene2"
-    >
+          <br>
 
-      <h1 class="main-title">
-        espera 😭
-      </h1>
+          <p>
+            Espero que cuando lo veas puedas sonreír aunque sea
+            un poquito. ♡
+          </p>
 
-    </section>
+        </div>
 
+      </div>
 
-    <!-- PARTE 3 -->
+      <p class="typing" id="typing"></p>
 
-    <section
-      class="scene text-scene"
-      id="scene3"
-    >
-
-      <h1 class="main-title">
-        antes de que digas “qué es esto”
-      </h1>
-
-    </section>
-
-
-    <!-- PARTE 4 -->
-
-    <section
-      class="scene text-scene"
-      id="scene4"
-    >
-
-      <h1 class="main-title">
-        JAJAJA no sabía cómo empezar a decirte esto
-      </h1>
-
-    </section>
-
-
-    <!-- PARTE 5 -->
-
-    <section
-      class="scene"
-      id="scene5"
-    >
-
-      <div class="glass-card">
-
-        <h2>
-          pero bueno...
-        </h2>
-
-        <p class="small-text">
-          aquí empieza lo importante 🩶
-        </p>
-
-        <button
-          class="glass-button"
-          id="continueButton"
-        >
-
-          continuar
-
-          <span class="button-arrow">
-            ›
-          </span>
-
-        </button>
-
+      <div class="footer">
+        hecho especialmente para ti ✦
       </div>
 
     </section>
 
   </main>
 
-
-  <div
-    class="transition"
-    id="transition"
-  ></div>
-
-
   <script>
 
-    const scenes = [
-      document.getElementById("scene1"),
-      document.getElementById("scene2"),
-      document.getElementById("scene3"),
-      document.getElementById("scene4"),
-      document.getElementById("scene5")
-    ];
+    /* ESTRELLAS */
 
-    const transition =
-      document.getElementById("transition");
+    const stars = document.getElementById("stars");
 
-    const continueButton =
-      document.getElementById("continueButton");
+    for (let i = 0; i < 90; i++) {
+
+      const star = document.createElement("div");
+
+      star.classList.add("star");
+
+      star.style.left = Math.random() * 100 + "%";
+      star.style.top = Math.random() * 100 + "%";
+      star.style.animationDelay = Math.random() * 3 + "s";
+
+      stars.appendChild(star);
+    }
 
 
-    function showScene(number) {
+    /* ABRIR CARTA */
 
-      transition.classList.add("active");
+    function openLetter() {
 
-      setTimeout(() => {
+      const letter = document.getElementById("letter");
 
-        scenes.forEach(scene => {
-          scene.classList.remove("active");
-        });
+      letter.classList.toggle("open");
 
-        scenes[number].classList.add("active");
+      if (letter.classList.contains("open")) {
+        typeMessage();
+      }
+    }
+
+
+    /* TEXTO ANIMADO */
+
+    function typeMessage() {
+
+      const text =
+        "Y aunque esto sea solamente una pequeña página, quería que supieras que fue hecha pensando en ti. ♡";
+
+      const element = document.getElementById("typing");
+
+      element.innerHTML = "";
+
+      let i = 0;
+
+      function write() {
+
+        if (i < text.length) {
+
+          element.innerHTML += text.charAt(i);
+
+          i++;
+
+          setTimeout(write, 45);
+
+        }
+
+      }
+
+      write();
+    }
+
+
+    /* CORAZONES */
+
+    function makeHearts() {
+
+      for (let i = 0; i < 18; i++) {
 
         setTimeout(() => {
-          transition.classList.remove("active");
-        }, 250);
 
-      }, 430);
+          const heart = document.createElement("div");
+
+          heart.classList.add("heart");
+
+          heart.innerHTML = ["♡", "♥", "💗", "✦"][
+            Math.floor(Math.random() * 4)
+          ];
+
+          heart.style.left =
+            Math.random() * 100 + "vw";
+
+          heart.style.top =
+            (70 + Math.random() * 20) + "vh";
+
+          document.body.appendChild(heart);
+
+          setTimeout(() => {
+            heart.remove();
+          }, 2500);
+
+        }, i * 100);
+
+      }
+
     }
 
 
-    setTimeout(() => {
-      showScene(1);
-    }, 2400);
+    /* CORAZONES AL TOCAR LA PANTALLA */
 
-    setTimeout(() => {
-      showScene(2);
-    }, 5000);
+    document.addEventListener("click", function(e) {
 
-    setTimeout(() => {
-      showScene(3);
-    }, 7900);
+      if (e.target.tagName === "BUTTON") return;
 
-    setTimeout(() => {
-      showScene(4);
-    }, 11300);
+      const heart = document.createElement("div");
 
+      heart.classList.add("heart");
 
-    /* BOTÓN */
+      heart.innerHTML = "♡";
 
-    continueButton.addEventListener(
-      "click",
-      () => {
+      heart.style.left = e.clientX + "px";
+      heart.style.top = e.clientY + "px";
 
-        /*
-          AQUÍ PONDREMOS
-          LA SIGUIENTE PARTE
-          DEL REGALO.
-        */
+      document.body.appendChild(heart);
 
-      }
-    );
+      setTimeout(() => {
+        heart.remove();
+      }, 2500);
 
-
-    /* MOVIMIENTO DEL FONDO */
-
-    const cursorLight =
-      document.querySelector(".cursor-light");
-
-    const glowOne =
-      document.querySelector(".glow.one");
-
-    const glowTwo =
-      document.querySelector(".glow.two");
-
-    const glowThree =
-      document.querySelector(".glow.three");
-
-
-    let targetX = 0;
-    let targetY = 0;
-
-    let currentX = 0;
-    let currentY = 0;
-
-
-    document.addEventListener(
-      "mousemove",
-      event => {
-
-        const centerX =
-          window.innerWidth / 2;
-
-        const centerY =
-          window.innerHeight / 2;
-
-
-        targetX =
-          (event.clientX - centerX)
-          / centerX;
-
-        targetY =
-          (event.clientY - centerY)
-          / centerY;
-
-
-        cursorLight.style.left =
-          event.clientX + "px";
-
-        cursorLight.style.top =
-          event.clientY + "px";
-
-      }
-    );
-
-
-    function animateBackground() {
-
-      currentX +=
-        (targetX - currentX) * .045;
-
-      currentY +=
-        (targetY - currentY) * .045;
-
-
-      glowOne.style.transform =
-        `translate(
-          ${currentX * 30}px,
-          ${currentY * 24}px
-        )`;
-
-      glowTwo.style.transform =
-        `translate(
-          ${currentX * -25}px,
-          ${currentY * -20}px
-        )`;
-
-      glowThree.style.transform =
-        `translate(
-          ${currentX * 40}px,
-          ${currentY * 30}px
-        )`;
-
-
-      requestAnimationFrame(
-        animateBackground
-      );
-    }
-
-
-    animateBackground();
+    });
 
   </script>
 
