@@ -1,996 +1,941 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#050505">
+<meta charset="UTF-8">
 
-  <title>para ti 🖤</title>
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
-  <style>
+<title>para ti</title>
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
 
-    :root {
-      --black: #050505;
-      --white: #f5f5f7;
-      --gray: #a7a7ad;
+/* ================================
+   BASE
+================================ */
 
-      /* ROJO PERLADO */
-      --red: #b51f3f;
-      --red-light: #e85b72;
-      --red-dark: #6e0d24;
-    }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-    html,
-    body {
-      width: 100%;
-      min-height: 100%;
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
 
-      background: var(--black);
-    }
+body {
+  overflow: hidden;
+  background: #ffffff;
 
-    body {
-      min-height: 100vh;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "SF Pro Text",
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
 
-      overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
 
-      color: var(--white);
 
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "SF Pro Display",
-        "SF Pro Text",
-        "Helvetica Neue",
-        Arial,
-        sans-serif;
+/* ================================
+   PANTALLA
+================================ */
 
-      -webkit-font-smoothing: antialiased;
+.screen {
+  position: relative;
 
-      text-rendering: optimizeLegibility;
-    }
+  width: 100vw;
+  height: 100vh;
 
+  overflow: hidden;
 
-    /* =========================
-       FONDO NEGRO
-    ========================= */
+  background: #ffffff;
+}
 
-    .background {
-      position: fixed;
 
-      inset: 0;
+/* ================================
+   GLOBOS — FONDO
+================================ */
 
-      overflow: hidden;
+.balloons {
+  position: absolute;
 
-      background:
-        radial-gradient(
-          circle at 50% 50%,
-          #100509 0%,
-          #050505 55%,
-          #020202 100%
-        );
+  inset: 0;
 
-      z-index: 0;
-    }
+  overflow: hidden;
 
+  z-index: 1;
 
-    /* =========================
-       ROJO PERLADO
-    ========================= */
+  pointer-events: none;
 
-    .glow {
-      position: absolute;
+  opacity: 0;
 
-      width: 560px;
-      height: 560px;
+  transition:
+    opacity .8s ease;
+}
 
-      border-radius: 50%;
 
-      filter: blur(120px);
+/* ================================
+   GLOBO
+================================ */
 
-      pointer-events: none;
+.balloon {
+  position: absolute;
 
-      transition:
-        transform 1.8s cubic-bezier(.2,.8,.2,1);
-    }
+  bottom: -180px;
 
-    .glow.one {
+  width: 58px;
+  height: 74px;
 
-      top: -260px;
-      left: -190px;
+  border-radius:
+    50% 50% 47% 47%;
 
-      background:
-        radial-gradient(
-          circle,
-          rgba(232,91,114,.72),
-          rgba(181,31,63,.20),
-          transparent 70%
-        );
+  opacity: .94;
 
-      opacity: .30;
-    }
+  cursor: pointer;
 
-    .glow.two {
+  pointer-events: auto;
 
-      right: -280px;
-      bottom: -260px;
+  box-shadow:
+    0 12px 28px
+    rgba(0,0,0,.10);
 
-      width: 650px;
-      height: 650px;
+  will-change:
+    transform;
+}
 
-      background:
-        radial-gradient(
-          circle,
-          rgba(181,31,63,.55),
-          rgba(110,13,36,.18),
-          transparent 70%
-        );
 
-      opacity: .25;
-    }
+/* brillo */
 
-    .glow.three {
+.balloon span {
+  position: absolute;
 
-      width: 400px;
-      height: 400px;
+  width: 12px;
+  height: 22px;
 
-      left: 42%;
-      top: 42%;
+  top: 13px;
+  left: 15px;
 
-      background:
-        radial-gradient(
-          circle,
-          rgba(232,91,114,.28),
-          transparent 70%
-        );
+  border-radius: 50%;
 
-      opacity: .15;
-    }
+  background:
+    rgba(255,255,255,.78);
 
+  filter: blur(1px);
 
-    /* =========================
-       TEXTURA SUAVE
-    ========================= */
+  pointer-events: none;
+}
 
-    .noise {
 
-      position: fixed;
+/* cuerda */
 
-      inset: 0;
+.balloon::before {
+  content: "";
 
-      z-index: 2;
+  position: absolute;
 
-      pointer-events: none;
+  left: 50%;
+  top: 100%;
 
-      opacity: .018;
+  width: 1px;
+  height: 170px;
 
-      background-image:
-        radial-gradient(
-          rgba(255,255,255,.8) .5px,
-          transparent .5px
-        );
+  background:
+    rgba(70,70,70,.23);
+}
+
+
+/* nudo */
+
+.balloon::after {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  bottom: -8px;
+
+  transform:
+    translateX(-50%);
+
+  width: 8px;
+  height: 9px;
+
+  background: inherit;
+
+  clip-path:
+    polygon(
+      0 0,
+      100% 0,
+      50% 100%
+    );
+}
+
+
+/* ================================
+   COLORES DE FIESTA
+================================ */
+
+.red {
+  background:
+    linear-gradient(
+      145deg,
+      #ff6675,
+      #ff003c 58%,
+      #d9002f
+    );
+}
+
+.blue {
+  background:
+    linear-gradient(
+      145deg,
+      #49c2ff,
+      #006eff 58%,
+      #0047d4
+    );
+}
+
+.yellow {
+  background:
+    linear-gradient(
+      145deg,
+      #fff34d,
+      #ffd000 58%,
+      #eea900
+    );
+}
+
+.pink {
+  background:
+    linear-gradient(
+      145deg,
+      #ff75bd,
+      #ff1684 58%,
+      #dc0068
+    );
+}
+
+.green {
+  background:
+    linear-gradient(
+      145deg,
+      #52f59d,
+      #00d86a 58%,
+      #00a64e
+    );
+}
+
+.purple {
+  background:
+    linear-gradient(
+      145deg,
+      #c866ff,
+      #8b2cff 58%,
+      #6414d6
+    );
+}
+
+.orange {
+  background:
+    linear-gradient(
+      145deg,
+      #ff9c4a,
+      #ff6417 58%,
+      #e53c00
+    );
+}
+
+.turquoise {
+  background:
+    linear-gradient(
+      145deg,
+      #4ff5e8,
+      #00cfc1 58%,
+      #009b92
+    );
+}
+
+
+/* ================================
+   SUBIDA RÁPIDA
+================================ */
+
+@keyframes rise {
+
+  0% {
+    transform:
+      translate3d(0, 0, 0)
+      rotate(-5deg);
+  }
+
+  25% {
+    transform:
+      translate3d(25px, -30vh, 0)
+      rotate(5deg);
+  }
+
+  50% {
+    transform:
+      translate3d(-22px, -65vh, 0)
+      rotate(-4deg);
+  }
+
+  75% {
+    transform:
+      translate3d(28px, -95vh, 0)
+      rotate(5deg);
+  }
+
+  100% {
+    transform:
+      translate3d(-18px, -145vh, 0)
+      rotate(-3deg);
+  }
+}
+
+
+/* ================================
+   MUCHOS GLOBOS
+================================ */
+
+.balloon:nth-child(1) {
+  left: 1%;
+  animation:
+    rise 4.8s linear infinite;
+}
+
+.balloon:nth-child(2) {
+  left: 10%;
+  width: 72px;
+  height: 92px;
+  animation:
+    rise 5.6s linear infinite .5s;
+}
+
+.balloon:nth-child(3) {
+  left: 20%;
+  width: 52px;
+  height: 67px;
+  animation:
+    rise 4.4s linear infinite 1.2s;
+}
+
+.balloon:nth-child(4) {
+  left: 30%;
+  width: 82px;
+  height: 104px;
+  animation:
+    rise 6s linear infinite .8s;
+}
+
+.balloon:nth-child(5) {
+  left: 41%;
+  width: 58px;
+  height: 74px;
+  animation:
+    rise 4.7s linear infinite 1.7s;
+}
+
+.balloon:nth-child(6) {
+  left: 51%;
+  width: 75px;
+  height: 95px;
+  animation:
+    rise 5.4s linear infinite .2s;
+}
+
+.balloon:nth-child(7) {
+  left: 62%;
+  width: 55px;
+  height: 70px;
+  animation:
+    rise 4.5s linear infinite 1.5s;
+}
+
+.balloon:nth-child(8) {
+  left: 71%;
+  width: 88px;
+  height: 112px;
+  animation:
+    rise 6.2s linear infinite .9s;
+}
+
+.balloon:nth-child(9) {
+  left: 82%;
+  width: 60px;
+  height: 77px;
+  animation:
+    rise 4.6s linear infinite 2s;
+}
+
+.balloon:nth-child(10) {
+  left: 91%;
+  width: 78px;
+  height: 99px;
+  animation:
+    rise 5.7s linear infinite .3s;
+}
+
+
+/* ================================
+   CONTENIDO — DELANTE
+================================ */
+
+.content {
+  position: relative;
+
+  z-index: 10;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  transition:
+    opacity 1s ease,
+    transform 1s
+    cubic-bezier(.2,.8,.2,1);
+}
+
+
+/* ================================
+   TU FOTO
+================================ */
+
+.photo {
+  width:
+    min(72vw, 360px);
+
+  height:
+    min(72vw, 360px);
 
-      background-size: 5px 5px;
-    }
+  border-radius:
+    30px;
 
+  overflow:
+    hidden;
 
-    /* =========================
-       LUZ DEL MOUSE
-    ========================= */
+  background:
+    transparent;
 
-    .cursor-light {
+  box-shadow:
+    0 25px 70px
+    rgba(0,0,0,.10);
+}
 
-      position: fixed;
+.photo img {
+  width: 100%;
+  height: 100%;
 
-      width: 300px;
-      height: 300px;
+  display: block;
 
-      border-radius: 50%;
+  object-fit: cover;
+}
 
-      transform:
-        translate(-50%, -50%);
 
-      pointer-events: none;
+/* ================================
+   BOTÓN
+================================ */
 
-      z-index: 1;
+.button {
+  margin-top: 28px;
 
-      background:
-        radial-gradient(
-          circle,
-          rgba(232,91,114,.10),
-          transparent 68%
-        );
-    }
+  min-height: 47px;
 
+  padding:
+    0 9px 0 20px;
 
-    /* =========================
-       CONTENEDOR
-    ========================= */
+  border-radius: 999px;
 
-    .experience {
+  border:
+    1px solid
+    rgba(0,0,0,.12);
 
-      position: relative;
+  background:
+    rgba(255,255,255,.84);
 
-      z-index: 5;
+  color:
+    #1d1d1f;
 
-      width: 100%;
-      height: 100vh;
+  font-family:
+    inherit;
 
-      overflow: hidden;
-    }
+  font-size: 15px;
 
+  display: flex;
 
-    /* =========================
-       ESCENAS
-    ========================= */
+  align-items: center;
+  justify-content: center;
 
-    .scene {
+  gap: 12px;
 
-      position: absolute;
+  cursor: pointer;
 
-      inset: 0;
+  box-shadow:
+    0 8px 30px
+    rgba(0,0,0,.08);
 
-      width: 100%;
-      height: 100%;
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease;
+}
 
-      display: flex;
+.button:hover {
+  transform:
+    translateY(-2px);
 
-      align-items: center;
-      justify-content: center;
+  box-shadow:
+    0 12px 35px
+    rgba(0,0,0,.13);
+}
 
-      padding: 25px;
 
-      opacity: 0;
+/* ================================
+   FLECHA
+================================ */
 
-      pointer-events: none;
+.arrow {
+  width: 25px;
+  height: 25px;
 
-      transform:
-        scale(.985)
-        translateY(10px);
+  flex:
+    0 0 25px;
 
-      filter: blur(7px);
+  display: flex;
 
-      transition:
+  align-items: center;
+  justify-content: center;
 
-        opacity .9s cubic-bezier(.2,.8,.2,1),
+  border-radius: 50%;
 
-        transform 1s cubic-bezier(.2,.8,.2,1),
+  background:
+    #1d1d1f;
 
-        filter 1s cubic-bezier(.2,.8,.2,1);
-    }
+  color:
+    #ffffff;
 
-    .scene.active {
+  font-size:
+    13px;
 
-      opacity: 1;
+  font-weight:
+    300;
 
-      pointer-events: auto;
+  line-height:
+    1;
 
-      transform:
-        scale(1)
-        translateY(0);
+  padding:
+    0 0 1px 1px;
+}
 
-      filter: blur(0);
-    }
 
+/* ================================
+   CLICK EN CONTINUAR
+================================ */
 
-    /* =========================
-       ESCENAS DE TEXTO
-    ========================= */
+.started .balloons {
+  opacity: 1;
+}
 
-    .text-scene {
+.started .content {
+  transform:
+    translateY(-22px)
+    scale(.97);
 
-      flex-direction: column;
+  opacity: .10;
+}
 
-      text-align: center;
-    }
 
+/* ================================
+   EXPLOSIÓN
+================================ */
 
-    .main-title {
+.pop {
+  position: absolute;
 
-      max-width: 900px;
+  width: 8px;
+  height: 8px;
 
-      font-size:
-        clamp(40px, 9vw, 78px);
+  border-radius: 50%;
 
-      line-height: 1.02;
+  pointer-events: none;
 
-      font-weight: 300;
+  z-index: 5;
 
-      letter-spacing: -.055em;
+  animation:
+    popParticle
+    .55s
+    ease-out
+    forwards;
+}
 
-      color:
-        #f5f5f7;
 
-      opacity: 0;
+@keyframes popParticle {
 
-      transform:
-        translateY(18px);
+  0% {
+    transform:
+      translate(0,0)
+      scale(1);
 
-      transition:
+    opacity: 1;
+  }
 
-        opacity 1s cubic-bezier(.2,.8,.2,1) .15s,
+  100% {
+    transform:
+      translate(
+        var(--x),
+        var(--y)
+      )
+      scale(.15);
 
-        transform 1s cubic-bezier(.2,.8,.2,1) .15s;
-    }
+    opacity: 0;
+  }
+}
 
-    .scene.active .main-title {
 
-      opacity: 1;
+.balloon.popping {
+  animation:
+    none !important;
 
-      transform:
-        translateY(0);
-    }
+  transform:
+    scale(.15);
 
+  opacity:
+    0;
+}
 
-    /* =========================
-       DETALLE ROJO
-    ========================= */
 
-    .red-dot {
+/* ================================
+   CELULAR
+================================ */
 
-      width: 6px;
-      height: 6px;
+@media (max-width: 600px) {
 
-      margin-bottom: 27px;
+  .photo {
+    width: 75vw;
+    height: 75vw;
 
-      border-radius: 50%;
+    border-radius: 26px;
+  }
 
-      background:
-        radial-gradient(
-          circle at 30% 25%,
-          #ffb1bd,
-          #e85b72 45%,
-          #8b122b
-        );
+}
 
-      box-shadow:
+</style>
 
-        0 0 8px rgba(232,91,114,.75),
-
-        0 0 28px rgba(181,31,63,.35);
-
-      opacity: 0;
-
-      transform:
-        scale(.5);
-
-      transition:
-
-        opacity .8s ease,
-
-        transform .8s cubic-bezier(.2,.8,.2,1);
-    }
-
-    .scene.active .red-dot {
-
-      opacity: 1;
-
-      transform:
-        scale(1);
-    }
-
-
-    /* =========================
-       ESCENA 2-4
-    ========================= */
-
-    .small-text {
-
-      margin-top: 22px;
-
-      max-width: 650px;
-
-      font-size:
-        clamp(17px, 4vw, 21px);
-
-      line-height: 1.5;
-
-      font-weight: 400;
-
-      letter-spacing: -.018em;
-
-      color:
-        rgba(245,245,247,.58);
-
-      opacity: 0;
-
-      transform:
-        translateY(14px);
-
-      transition:
-
-        opacity .9s ease .35s,
-
-        transform .9s ease .35s;
-    }
-
-    .scene.active .small-text {
-
-      opacity: 1;
-
-      transform:
-        translateY(0);
-    }
-
-
-    /* =========================
-       VIDRIO
-    ========================= */
-
-    .glass-card {
-
-      width:
-        min(90vw, 580px);
-
-      padding:
-        45px 34px;
-
-      border:
-        1px solid rgba(255,255,255,.12);
-
-      border-radius: 32px;
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(255,255,255,.07),
-          rgba(255,255,255,.025)
-        );
-
-      backdrop-filter:
-        blur(32px)
-        saturate(120%);
-
-      -webkit-backdrop-filter:
-        blur(32px)
-        saturate(120%);
-
-      box-shadow:
-
-        0 30px 90px rgba(0,0,0,.5),
-
-        inset 0 1px 0
-        rgba(255,255,255,.09);
-
-      text-align: center;
-
-      opacity: 0;
-
-      transform:
-        translateY(18px)
-        scale(.98);
-
-      transition:
-
-        opacity 1s ease .2s,
-
-        transform 1s cubic-bezier(.2,.8,.2,1) .2s;
-    }
-
-    .scene.active .glass-card {
-
-      opacity: 1;
-
-      transform:
-        translateY(0)
-        scale(1);
-    }
-
-
-    /* =========================
-       BOTÓN
-    ========================= */
-
-    .glass-button {
-
-      margin-top: 30px;
-
-      padding:
-        12px 13px 12px 21px;
-
-      display: inline-flex;
-
-      align-items: center;
-
-      gap: 14px;
-
-      border:
-        1px solid rgba(255,255,255,.14);
-
-      border-radius: 999px;
-
-      background:
-        rgba(255,255,255,.055);
-
-      color:
-        rgba(255,255,255,.9);
-
-      font-family: inherit;
-
-      font-size: 15px;
-
-      cursor: pointer;
-
-      backdrop-filter:
-        blur(24px);
-
-      -webkit-backdrop-filter:
-        blur(24px);
-
-      box-shadow:
-
-        inset 0 1px 0
-        rgba(255,255,255,.08),
-
-        0 15px 40px
-        rgba(0,0,0,.2);
-
-      transition:
-
-        background .35s ease,
-
-        border-color .35s ease,
-
-        transform .35s ease;
-    }
-
-    .glass-button:hover {
-
-      background:
-        rgba(181,31,63,.15);
-
-      border-color:
-        rgba(232,91,114,.35);
-
-      transform:
-        translateY(-2px);
-    }
-
-
-    .button-arrow {
-
-      width: 30px;
-      height: 30px;
-
-      display: flex;
-
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 50%;
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(232,91,114,.25),
-          rgba(181,31,63,.12)
-        );
-
-      font-size: 20px;
-    }
-
-
-    /* =========================
-       TRANSICIÓN
-    ========================= */
-
-    .transition {
-
-      position: fixed;
-
-      inset: 0;
-
-      z-index: 50;
-
-      pointer-events: none;
-
-      opacity: 0;
-
-      background:
-        rgba(3,3,3,.12);
-
-      backdrop-filter:
-        blur(0);
-
-      -webkit-backdrop-filter:
-        blur(0);
-
-      transition:
-
-        opacity .7s ease,
-
-        backdrop-filter .7s ease;
-    }
-
-    .transition.active {
-
-      opacity: 1;
-
-      backdrop-filter:
-        blur(24px)
-        saturate(90%);
-
-      -webkit-backdrop-filter:
-        blur(24px)
-        saturate(90%);
-    }
-
-
-    /* =========================
-       CELULAR
-    ========================= */
-
-    @media (max-width: 600px) {
-
-      .scene {
-        padding: 20px;
-      }
-
-      .cursor-light {
-        display: none;
-      }
-
-      .glow {
-        filter:
-          blur(90px);
-      }
-
-    }
-
-  </style>
 </head>
 
 
 <body>
 
 
-  <!-- FONDO -->
+<div
+  class="screen"
+  id="screen"
+>
 
-  <div class="background">
 
-    <div class="glow one"></div>
+  <!-- =================================
+       GLOBOS DEL FONDO
+  ================================== -->
 
-    <div class="glow two"></div>
+  <div
+    class="balloons"
+    id="balloons"
+  >
 
-    <div class="glow three"></div>
+    <div class="balloon red">
+      <span></span>
+    </div>
+
+    <div class="balloon blue">
+      <span></span>
+    </div>
+
+    <div class="balloon yellow">
+      <span></span>
+    </div>
+
+    <div class="balloon pink">
+      <span></span>
+    </div>
+
+    <div class="balloon green">
+      <span></span>
+    </div>
+
+    <div class="balloon purple">
+      <span></span>
+    </div>
+
+    <div class="balloon orange">
+      <span></span>
+    </div>
+
+    <div class="balloon turquoise">
+      <span></span>
+    </div>
+
+    <div class="balloon red">
+      <span></span>
+    </div>
+
+    <div class="balloon yellow">
+      <span></span>
+    </div>
 
   </div>
 
 
-  <div class="cursor-light"></div>
-
-  <div class="noise"></div>
-
-
-  <!-- EXPERIENCIA -->
-
-  <main class="experience">
-
-
-    <!-- PARTE 1 -->
-
-    <section
-      class="scene text-scene active"
-      id="scene1"
-    >
-
-      <div class="red-dot"></div>
-
-      <h1 class="main-title">
-        Heeeeey vrujinii
-      </h1>
-
-    </section>
-
-
-    <!-- PARTE 2 -->
-
-    <section
-      class="scene text-scene"
-      id="scene2"
-    >
-
-      <h1 class="main-title">
-        espera 😭
-      </h1>
-
-    </section>
-
-
-    <!-- PARTE 3 -->
-
-    <section
-      class="scene text-scene"
-      id="scene3"
-    >
-
-      <h1 class="main-title">
-        antes de que digas “qué es esto”
-      </h1>
-
-    </section>
-
-
-    <!-- PARTE 4 -->
-
-    <section
-      class="scene text-scene"
-      id="scene4"
-    >
-
-      <h1 class="main-title">
-        JAJAJA no sabía cómo empezar a decirte esto
-      </h1>
-
-    </section>
-
-
-    <!-- SIGUIENTE PARTE -->
-
-    <section
-      class="scene"
-      id="scene5"
-    >
-
-      <div class="glass-card">
-
-        <h2 class="main-title">
-
-          pero bueno...
-
-        </h2>
-
-        <p class="small-text">
-
-          aquí empieza lo importante 🩶
-
-        </p>
-
-        <button
-          class="glass-button"
-          id="continueButton"
-        >
-
-          continuar
-
-          <span class="button-arrow">
-            ›
-          </span>
-
-        </button>
-
-      </div>
-
-    </section>
-
-
-  </main>
-
-
-  <!-- TRANSICIÓN -->
+  <!-- =================================
+       FOTO + BOTÓN
+  ================================== -->
 
   <div
-    class="transition"
-    id="transition"
-  ></div>
+    class="content"
+    id="content"
+  >
+
+    <div
+      class="photo"
+      id="photo"
+    >
+
+      <img
+        src="foto.jpeg"
+        alt=""
+      >
+
+    </div>
 
 
-  <script>
+    <button
+      class="button"
+      id="startButton"
+    >
+
+      continuar
+
+      <span class="arrow">
+        &rsaquo;
+      </span>
+
+    </button>
+
+  </div>
 
 
-    const scenes = [
-
-      document.getElementById("scene1"),
-
-      document.getElementById("scene2"),
-
-      document.getElementById("scene3"),
-
-      document.getElementById("scene4"),
-
-      document.getElementById("scene5")
-
-    ];
+</div>
 
 
-    const transition =
-      document.getElementById("transition");
+<script>
 
 
-    const continueButton =
-      document.getElementById("continueButton");
+const screen =
+  document.getElementById(
+    "screen"
+  );
 
 
-    let currentScene = 0;
+const button =
+  document.getElementById(
+    "startButton"
+  );
 
 
-    /* CAMBIAR ESCENA */
-
-    function showScene(number) {
-
-      transition.classList.add("active");
-
-
-      setTimeout(() => {
-
-        scenes.forEach(scene => {
-
-          scene.classList.remove("active");
-
-        });
+const balloons =
+  document.querySelectorAll(
+    ".balloon"
+  );
 
 
-        scenes[number].classList.add("active");
+/* ================================
+   CONTINUAR
+================================ */
 
+button.addEventListener(
+  "click",
+  () => {
 
-        currentScene = number;
-
-
-        setTimeout(() => {
-
-          transition.classList.remove("active");
-
-        }, 250);
-
-
-      }, 430);
-
-    }
-
-
-    /* SECUENCIA */
-
-    setTimeout(() => {
-
-      showScene(1);
-
-    }, 2400);
-
-
-    setTimeout(() => {
-
-      showScene(2);
-
-    }, 5000);
-
-
-    setTimeout(() => {
-
-      showScene(3);
-
-    }, 7900);
-
-
-    setTimeout(() => {
-
-      showScene(4);
-
-    }, 11300);
-
-
-    /* BOTÓN */
-
-    continueButton.addEventListener(
-      "click",
-      () => {
-
-        /*
-          AQUÍ PONDREMOS
-          LA SIGUIENTE PARTE
-          DEL REGALO.
-        */
-
-      }
+    screen.classList.add(
+      "started"
     );
 
-
-    /* MOVIMIENTO DEL FONDO */
-
-    const cursorLight =
-      document.querySelector(".cursor-light");
+  }
+);
 
 
-    const glowOne =
-      document.querySelector(".glow.one");
+/* ================================
+   EXPLOTAR GLOBOS
+================================ */
 
+balloons.forEach(
+  balloon => {
 
-    const glowTwo =
-      document.querySelector(".glow.two");
-
-
-    const glowThree =
-      document.querySelector(".glow.three");
-
-
-    let targetX = 0;
-
-    let targetY = 0;
-
-    let currentX = 0;
-
-    let currentY = 0;
-
-
-    document.addEventListener(
-      "mousemove",
+    balloon.addEventListener(
+      "click",
       event => {
 
+        event.stopPropagation();
+
+
+        if (
+          balloon.classList.contains(
+            "popping"
+          )
+        ) {
+          return;
+        }
+
+
+        const rect =
+          balloon.getBoundingClientRect();
+
+
         const centerX =
-          window.innerWidth / 2;
+          rect.left +
+          rect.width / 2;
+
 
         const centerY =
-          window.innerHeight / 2;
+          rect.top +
+          rect.height / 2;
 
 
-        targetX =
-          (event.clientX - centerX)
-          / centerX;
+        const colors = [
+
+          "#ff003c",
+          "#006eff",
+          "#ffd000",
+          "#ff1684",
+          "#00d86a",
+          "#8b2cff",
+          "#ff6417",
+          "#00cfc1"
+
+        ];
 
 
-        targetY =
-          (event.clientY - centerY)
-          / centerY;
+        /* partículas */
+
+        for (
+          let i = 0;
+          i < 16;
+          i++
+        ) {
+
+          const particle =
+            document.createElement(
+              "div"
+            );
 
 
-        cursorLight.style.left =
-          event.clientX + "px";
+          particle.className =
+            "pop";
 
 
-        cursorLight.style.top =
-          event.clientY + "px";
+          particle.style.left =
+            centerX + "px";
+
+
+          particle.style.top =
+            centerY + "px";
+
+
+          const angle =
+            Math.random()
+            * Math.PI
+            * 2;
+
+
+          const distance =
+            35 +
+            Math.random() * 70;
+
+
+          particle.style.setProperty(
+            "--x",
+            Math.cos(angle)
+            * distance
+            + "px"
+          );
+
+
+          particle.style.setProperty(
+            "--y",
+            Math.sin(angle)
+            * distance
+            + "px"
+          );
+
+
+          particle.style.background =
+            colors[
+              Math.floor(
+                Math.random()
+                * colors.length
+              )
+            ];
+
+
+          document.body.appendChild(
+            particle
+          );
+
+
+          setTimeout(
+            () => {
+              particle.remove();
+            },
+            600
+          );
+
+        }
+
+
+        balloon.classList.add(
+          "popping"
+        );
+
+
+        /* reaparece después */
+
+        setTimeout(
+          () => {
+
+            balloon.classList.remove(
+              "popping"
+            );
+
+          },
+          700
+        );
 
       }
+
     );
 
-
-    function animateBackground() {
-
-      currentX +=
-        (targetX - currentX) * .045;
+  }
+);
 
 
-      currentY +=
-        (targetY - currentY) * .045;
-
-
-      glowOne.style.transform =
-        `translate(
-          ${currentX * 30}px,
-          ${currentY * 24}px
-        )`;
-
-
-      glowTwo.style.transform =
-        `translate(
-          ${currentX * -25}px,
-          ${currentY * -20}px
-        )`;
-
-
-      glowThree.style.transform =
-        `translate(
-          ${currentX * 40}px,
-          ${currentY * 30}px
-        )`;
-
-
-      requestAnimationFrame(
-        animateBackground
-      );
-
-    }
-
-
-    animateBackground();
-
-
-  </script>
+</script>
 
 
 </body>
+
 </html>
