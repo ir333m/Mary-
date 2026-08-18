@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050505">
 
-  <title>Para ti</title>
+  <title>para ti 🖤</title>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap');
 
     * {
       box-sizing: border-box;
@@ -16,498 +16,610 @@
     }
 
     :root {
-      --black: #050507;
-      --white: #f7f7fa;
-      --gray: rgba(210, 210, 220, 0.12);
-      --purple: #a855f7;
-      --purple-bright: #c45cff;
-      --purple-soft: #8b5cf6;
+      --black: #050505;
+      --white: #f5f5f7;
+      --gray: #a7a7ad;
+
+      /* ROJO PERLADO */
+      --red: #b51f3f;
+      --red-light: #e85b72;
+      --red-dark: #6e0d24;
     }
 
     html,
     body {
       width: 100%;
       min-height: 100%;
+
       background: var(--black);
     }
 
     body {
       min-height: 100vh;
+
       overflow: hidden;
+
       color: var(--white);
-      font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      position: relative;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "SF Pro Text",
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
+
+      -webkit-font-smoothing: antialiased;
+
+      text-rendering: optimizeLegibility;
     }
 
+
     /* =========================
-       FONDO
+       FONDO NEGRO
     ========================= */
 
     .background {
       position: fixed;
+
       inset: 0;
+
       overflow: hidden;
+
       background:
         radial-gradient(
-          circle at 50% 45%,
-          rgba(110, 30, 180, 0.08),
-          transparent 38%
-        ),
-        #050507;
+          circle at 50% 50%,
+          #100509 0%,
+          #050505 55%,
+          #020202 100%
+        );
+
       z-index: 0;
     }
 
+
+    /* =========================
+       ROJO PERLADO
+    ========================= */
+
     .glow {
       position: absolute;
-      width: 520px;
-      height: 520px;
+
+      width: 560px;
+      height: 560px;
+
       border-radius: 50%;
-      filter: blur(90px);
-      opacity: 0.35;
+
+      filter: blur(120px);
+
       pointer-events: none;
-      transition: transform 1.4s cubic-bezier(.2,.8,.2,1);
+
+      transition:
+        transform 1.8s cubic-bezier(.2,.8,.2,1);
     }
 
     .glow.one {
-      background: #7b18ff;
-      top: -180px;
-      left: -160px;
+
+      top: -260px;
+      left: -190px;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(232,91,114,.72),
+          rgba(181,31,63,.20),
+          transparent 70%
+        );
+
+      opacity: .30;
     }
 
     .glow.two {
-      background: #a832ff;
-      right: -220px;
-      bottom: -180px;
-      width: 580px;
-      height: 580px;
-      opacity: 0.28;
+
+      right: -280px;
+      bottom: -260px;
+
+      width: 650px;
+      height: 650px;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(181,31,63,.55),
+          rgba(110,13,36,.18),
+          transparent 70%
+        );
+
+      opacity: .25;
     }
 
     .glow.three {
-      background: #6416d8;
-      width: 330px;
-      height: 330px;
+
+      width: 400px;
+      height: 400px;
+
       left: 42%;
-      top: 48%;
-      opacity: 0.18;
+      top: 42%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(232,91,114,.28),
+          transparent 70%
+        );
+
+      opacity: .15;
     }
 
-    /* textura muy sutil */
+
+    /* =========================
+       TEXTURA SUAVE
+    ========================= */
+
     .noise {
+
       position: fixed;
+
       inset: 0;
-      pointer-events: none;
-      opacity: 0.035;
+
       z-index: 2;
+
+      pointer-events: none;
+
+      opacity: .018;
+
       background-image:
-        radial-gradient(rgba(255,255,255,.8) 0.5px, transparent 0.5px);
+        radial-gradient(
+          rgba(255,255,255,.8) .5px,
+          transparent .5px
+        );
+
       background-size: 5px 5px;
     }
 
+
     /* =========================
-       LUZ DEL CURSOR
+       LUZ DEL MOUSE
     ========================= */
 
     .cursor-light {
+
       position: fixed;
-      width: 260px;
-      height: 260px;
+
+      width: 300px;
+      height: 300px;
+
       border-radius: 50%;
+
+      transform:
+        translate(-50%, -50%);
+
       pointer-events: none;
+
       z-index: 1;
-      background: radial-gradient(
-        circle,
-        rgba(178, 66, 255, 0.12),
-        transparent 68%
-      );
-      transform: translate(-50%, -50%);
-      transition: opacity 0.4s ease;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(232,91,114,.10),
+          transparent 68%
+        );
     }
 
+
     /* =========================
-       CONTENIDO
+       CONTENEDOR
+    ========================= */
+
+    .experience {
+
+      position: relative;
+
+      z-index: 5;
+
+      width: 100%;
+      height: 100vh;
+
+      overflow: hidden;
+    }
+
+
+    /* =========================
+       ESCENAS
     ========================= */
 
     .scene {
-      position: relative;
-      z-index: 5;
+
+      position: absolute;
+
+      inset: 0;
+
       width: 100%;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
-
-    .glass {
-      width: min(92vw, 570px);
-      min-height: 440px;
-      padding: 55px 42px;
-      position: relative;
-
-      background: rgba(150, 150, 165, 0.07);
-
-      border: 1px solid rgba(255,255,255,0.13);
-
-      border-radius: 34px;
-
-      backdrop-filter: blur(28px) saturate(130%);
-      -webkit-backdrop-filter: blur(28px) saturate(130%);
-
-      box-shadow:
-        0 30px 100px rgba(0,0,0,0.55),
-        inset 0 1px 0 rgba(255,255,255,0.10);
+      height: 100%;
 
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
 
-      text-align: center;
+      align-items: center;
+      justify-content: center;
+
+      padding: 25px;
+
+      opacity: 0;
+
+      pointer-events: none;
 
       transform:
-        translate3d(
-          var(--card-x, 0px),
-          var(--card-y, 0px),
-          0
-        );
+        scale(.985)
+        translateY(10px);
+
+      filter: blur(7px);
 
       transition:
-        transform 1.2s cubic-bezier(.2,.8,.2,1),
-        opacity 0.8s ease,
-        filter 0.8s ease;
+
+        opacity .9s cubic-bezier(.2,.8,.2,1),
+
+        transform 1s cubic-bezier(.2,.8,.2,1),
+
+        filter 1s cubic-bezier(.2,.8,.2,1);
     }
 
-    /* reflejo superior */
-    .glass::before {
-      content: "";
-      position: absolute;
-      inset: 1px;
-      border-radius: 33px;
-      pointer-events: none;
+    .scene.active {
+
+      opacity: 1;
+
+      pointer-events: auto;
+
+      transform:
+        scale(1)
+        translateY(0);
+
+      filter: blur(0);
+    }
+
+
+    /* =========================
+       ESCENAS DE TEXTO
+    ========================= */
+
+    .text-scene {
+
+      flex-direction: column;
+
+      text-align: center;
+    }
+
+
+    .main-title {
+
+      max-width: 900px;
+
+      font-size:
+        clamp(40px, 9vw, 78px);
+
+      line-height: 1.02;
+
+      font-weight: 300;
+
+      letter-spacing: -.055em;
+
+      color:
+        #f5f5f7;
+
+      opacity: 0;
+
+      transform:
+        translateY(18px);
+
+      transition:
+
+        opacity 1s cubic-bezier(.2,.8,.2,1) .15s,
+
+        transform 1s cubic-bezier(.2,.8,.2,1) .15s;
+    }
+
+    .scene.active .main-title {
+
+      opacity: 1;
+
+      transform:
+        translateY(0);
+    }
+
+
+    /* =========================
+       DETALLE ROJO
+    ========================= */
+
+    .red-dot {
+
+      width: 6px;
+      height: 6px;
+
+      margin-bottom: 27px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle at 30% 25%,
+          #ffb1bd,
+          #e85b72 45%,
+          #8b122b
+        );
+
+      box-shadow:
+
+        0 0 8px rgba(232,91,114,.75),
+
+        0 0 28px rgba(181,31,63,.35);
+
+      opacity: 0;
+
+      transform:
+        scale(.5);
+
+      transition:
+
+        opacity .8s ease,
+
+        transform .8s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .scene.active .red-dot {
+
+      opacity: 1;
+
+      transform:
+        scale(1);
+    }
+
+
+    /* =========================
+       ESCENA 2-4
+    ========================= */
+
+    .small-text {
+
+      margin-top: 22px;
+
+      max-width: 650px;
+
+      font-size:
+        clamp(17px, 4vw, 21px);
+
+      line-height: 1.5;
+
+      font-weight: 400;
+
+      letter-spacing: -.018em;
+
+      color:
+        rgba(245,245,247,.58);
+
+      opacity: 0;
+
+      transform:
+        translateY(14px);
+
+      transition:
+
+        opacity .9s ease .35s,
+
+        transform .9s ease .35s;
+    }
+
+    .scene.active .small-text {
+
+      opacity: 1;
+
+      transform:
+        translateY(0);
+    }
+
+
+    /* =========================
+       VIDRIO
+    ========================= */
+
+    .glass-card {
+
+      width:
+        min(90vw, 580px);
+
+      padding:
+        45px 34px;
+
+      border:
+        1px solid rgba(255,255,255,.12);
+
+      border-radius: 32px;
 
       background:
         linear-gradient(
-          130deg,
-          rgba(255,255,255,0.10),
-          transparent 25%,
-          transparent 75%,
-          rgba(180,70,255,0.07)
+          145deg,
+          rgba(255,255,255,.07),
+          rgba(255,255,255,.025)
         );
-    }
 
-    .eyebrow {
-      font-size: 12px;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.48);
-      margin-bottom: 20px;
+      backdrop-filter:
+        blur(32px)
+        saturate(120%);
 
-      opacity: 0;
-      transform: translateY(12px);
-
-      animation: reveal 1s 0.2s forwards;
-    }
-
-    h1 {
-      font-family: "Playfair Display", Georgia, serif;
-      font-size: clamp(42px, 9vw, 74px);
-      font-weight: 400;
-      letter-spacing: -0.04em;
-      line-height: 0.95;
-
-      opacity: 0;
-      transform: translateY(16px);
-
-      animation: reveal 1s 0.35s forwards;
-    }
-
-    .subtitle {
-      margin-top: 22px;
-      font-size: 16px;
-      font-weight: 300;
-      color: rgba(255,255,255,0.62);
-      letter-spacing: 0.02em;
-
-      opacity: 0;
-      transform: translateY(12px);
-
-      animation: reveal 1s 0.5s forwards;
-    }
-
-    /* =========================
-       GALLINA
-    ========================= */
-
-    .chicken-area {
-      position: relative;
-      width: 180px;
-      height: 105px;
-      margin-top: 22px;
-
-      opacity: 0;
-      transform: translateY(14px);
-
-      animation: reveal 1s 0.65s forwards;
-    }
-
-    .chicken {
-      position: absolute;
-      left: 50%;
-      bottom: 4px;
-      transform: translateX(-50%);
-      cursor: pointer;
-      user-select: none;
-      touch-action: manipulation;
-
-      transition:
-        left 0.55s cubic-bezier(.2,.8,.2,1),
-        transform 0.35s ease;
-    }
-
-    .chicken:hover {
-      transform: translateX(-50%) scale(1.06);
-    }
-
-    .chicken-body {
-      width: 62px;
-      height: 48px;
-      background: #f4f4f6;
-      border-radius: 52% 48% 48% 52%;
-      position: relative;
+      -webkit-backdrop-filter:
+        blur(32px)
+        saturate(120%);
 
       box-shadow:
-        0 8px 20px rgba(0,0,0,0.35),
-        inset -4px -5px 8px rgba(0,0,0,0.08);
-    }
 
-    .chicken-head {
-      position: absolute;
-      width: 34px;
-      height: 34px;
-      background: #fafafa;
-      border-radius: 50%;
-      right: -20px;
-      top: -14px;
+        0 30px 90px rgba(0,0,0,.5),
 
-      box-shadow: 0 5px 12px rgba(0,0,0,0.25);
-    }
+        inset 0 1px 0
+        rgba(255,255,255,.09);
 
-    .eye {
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: #111;
-      right: 10px;
-      top: 11px;
-    }
-
-    .beak {
-      position: absolute;
-      right: -7px;
-      top: 17px;
-      width: 0;
-      height: 0;
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      border-left: 8px solid #ffb23e;
-    }
-
-    .comb {
-      position: absolute;
-      right: -1px;
-      top: -7px;
-      width: 10px;
-      height: 8px;
-      border-radius: 8px 8px 2px 2px;
-      background: #d65a82;
-    }
-
-    .wing {
-      position: absolute;
-      width: 28px;
-      height: 22px;
-      background: #e3e3e8;
-      border-radius: 60% 40% 50% 50%;
-      left: 20px;
-      top: 11px;
-      transform: rotate(-8deg);
-    }
-
-    .leg {
-      position: absolute;
-      width: 3px;
-      height: 16px;
-      background: #e8a33b;
-      bottom: -12px;
-    }
-
-    .leg.left {
-      left: 20px;
-    }
-
-    .leg.right {
-      left: 40px;
-    }
-
-    .speech {
-      position: absolute;
-      bottom: 78px;
-      left: 50%;
-      transform: translateX(-50%);
-
-      min-width: 160px;
-      padding: 10px 15px;
-
-      background: rgba(30,30,36,0.62);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 18px;
-
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-
-      font-size: 13px;
-      color: rgba(255,255,255,0.86);
+      text-align: center;
 
       opacity: 0;
-      pointer-events: none;
+
+      transform:
+        translateY(18px)
+        scale(.98);
 
       transition:
-        opacity 0.35s ease,
-        transform 0.35s ease;
+
+        opacity 1s ease .2s,
+
+        transform 1s cubic-bezier(.2,.8,.2,1) .2s;
     }
 
-    .speech.show {
+    .scene.active .glass-card {
+
       opacity: 1;
-      transform: translateX(-50%) translateY(-4px);
+
+      transform:
+        translateY(0)
+        scale(1);
     }
+
 
     /* =========================
        BOTÓN
     ========================= */
 
-    .continue-button {
-      margin-top: 25px;
+    .glass-button {
+
+      margin-top: 30px;
+
+      padding:
+        12px 13px 12px 21px;
 
       display: inline-flex;
+
       align-items: center;
-      gap: 15px;
 
-      padding: 13px 17px 13px 20px;
+      gap: 14px;
 
-      color: rgba(255,255,255,0.88);
-      font-family: inherit;
-      font-size: 14px;
-      font-weight: 400;
+      border:
+        1px solid rgba(255,255,255,.14);
 
-      background: rgba(255,255,255,0.055);
-      border: 1px solid rgba(255,255,255,0.13);
       border-radius: 999px;
 
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      background:
+        rgba(255,255,255,.055);
+
+      color:
+        rgba(255,255,255,.9);
+
+      font-family: inherit;
+
+      font-size: 15px;
 
       cursor: pointer;
 
+      backdrop-filter:
+        blur(24px);
+
+      -webkit-backdrop-filter:
+        blur(24px);
+
       box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.09),
-        0 8px 30px rgba(0,0,0,0.2);
+
+        inset 0 1px 0
+        rgba(255,255,255,.08),
+
+        0 15px 40px
+        rgba(0,0,0,.2);
 
       transition:
-        transform 0.35s ease,
-        background 0.35s ease,
-        border-color 0.35s ease,
-        box-shadow 0.35s ease;
+
+        background .35s ease,
+
+        border-color .35s ease,
+
+        transform .35s ease;
     }
 
-    .continue-button span {
+    .glass-button:hover {
+
+      background:
+        rgba(181,31,63,.15);
+
+      border-color:
+        rgba(232,91,114,.35);
+
+      transform:
+        translateY(-2px);
+    }
+
+
+    .button-arrow {
+
+      width: 30px;
+      height: 30px;
+
       display: flex;
-      width: 28px;
-      height: 28px;
+
       align-items: center;
       justify-content: center;
 
       border-radius: 50%;
 
-      background: rgba(180,70,255,0.14);
+      background:
+        linear-gradient(
+          145deg,
+          rgba(232,91,114,.25),
+          rgba(181,31,63,.12)
+        );
 
-      transition:
-        transform 0.35s ease,
-        background 0.35s ease;
+      font-size: 20px;
     }
 
-    .continue-button:hover {
-      transform: translateY(-4px);
-      background: rgba(255,255,255,0.085);
-      border-color: rgba(196,92,255,0.45);
-
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.12),
-        0 12px 40px rgba(130,30,220,0.20);
-    }
-
-    .continue-button:hover span {
-      transform: translateX(3px);
-      background: rgba(180,70,255,0.25);
-    }
-
-    .continue-button:active {
-      transform: scale(0.96);
-    }
 
     /* =========================
        TRANSICIÓN
     ========================= */
 
-    .transition-layer {
+    .transition {
+
       position: fixed;
+
       inset: 0;
-      z-index: 20;
+
+      z-index: 50;
+
       pointer-events: none;
-
-      background: rgba(5,5,7,0.1);
-
-      backdrop-filter: blur(0px);
-      -webkit-backdrop-filter: blur(0px);
 
       opacity: 0;
 
+      background:
+        rgba(3,3,3,.12);
+
+      backdrop-filter:
+        blur(0);
+
+      -webkit-backdrop-filter:
+        blur(0);
+
       transition:
-        opacity 0.8s ease,
-        backdrop-filter 0.8s ease;
+
+        opacity .7s ease,
+
+        backdrop-filter .7s ease;
     }
 
-    .transition-layer.active {
+    .transition.active {
+
       opacity: 1;
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+
+      backdrop-filter:
+        blur(24px)
+        saturate(90%);
+
+      -webkit-backdrop-filter:
+        blur(24px)
+        saturate(90%);
     }
 
-    /* =========================
-       ANIMACIONES
-    ========================= */
-
-    @keyframes reveal {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes breathe {
-      0%, 100% {
-        transform: translateX(-50%) translateY(0);
-      }
-
-      50% {
-        transform: translateX(-50%) translateY(-4px);
-      }
-    }
-
-    .chicken {
-      animation: breathe 2.8s ease-in-out infinite;
-    }
 
     /* =========================
        CELULAR
@@ -515,283 +627,370 @@
 
     @media (max-width: 600px) {
 
-      .glass {
-        min-height: 470px;
-        padding: 45px 24px;
-        border-radius: 30px;
-      }
-
-      .glass::before {
-        border-radius: 29px;
-      }
-
-      .glow {
-        filter: blur(75px);
+      .scene {
+        padding: 20px;
       }
 
       .cursor-light {
         display: none;
       }
 
-      h1 {
-        font-size: clamp(44px, 15vw, 64px);
+      .glow {
+        filter:
+          blur(90px);
       }
 
-      .subtitle {
-        font-size: 15px;
-      }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
   </style>
 </head>
 
+
 <body>
 
+
+  <!-- FONDO -->
+
   <div class="background">
+
     <div class="glow one"></div>
+
     <div class="glow two"></div>
+
     <div class="glow three"></div>
+
   </div>
 
+
   <div class="cursor-light"></div>
+
   <div class="noise"></div>
 
-  <main class="scene">
 
-    <section class="glass">
+  <!-- EXPERIENCIA -->
 
-      <div class="eyebrow">
-        una pequeña cosa
-      </div>
+  <main class="experience">
 
-      <h1>oye, tú.</h1>
 
-      <p class="subtitle">
-        sí, tú.
-      </p>
+    <!-- PARTE 1 -->
 
-      <div class="chicken-area">
+    <section
+      class="scene text-scene active"
+      id="scene1"
+    >
 
-        <div class="speech show" id="speech">
-          presiona aquí
-        </div>
+      <div class="red-dot"></div>
 
-        <div class="chicken" id="chicken" aria-label="gallina">
-
-          <div class="chicken-body">
-            <div class="wing"></div>
-
-            <div class="leg left"></div>
-            <div class="leg right"></div>
-
-            <div class="chicken-head">
-              <div class="eye"></div>
-              <div class="beak"></div>
-              <div class="comb"></div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-      <button class="continue-button" id="continueButton">
-        continuar
-        <span>›</span>
-      </button>
+      <h1 class="main-title">
+        Heeeeey vrujinii
+      </h1>
 
     </section>
 
+
+    <!-- PARTE 2 -->
+
+    <section
+      class="scene text-scene"
+      id="scene2"
+    >
+
+      <h1 class="main-title">
+        espera 😭
+      </h1>
+
+    </section>
+
+
+    <!-- PARTE 3 -->
+
+    <section
+      class="scene text-scene"
+      id="scene3"
+    >
+
+      <h1 class="main-title">
+        antes de que digas “qué es esto”
+      </h1>
+
+    </section>
+
+
+    <!-- PARTE 4 -->
+
+    <section
+      class="scene text-scene"
+      id="scene4"
+    >
+
+      <h1 class="main-title">
+        JAJAJA no sabía cómo empezar a decirte esto
+      </h1>
+
+    </section>
+
+
+    <!-- SIGUIENTE PARTE -->
+
+    <section
+      class="scene"
+      id="scene5"
+    >
+
+      <div class="glass-card">
+
+        <h2 class="main-title">
+
+          pero bueno...
+
+        </h2>
+
+        <p class="small-text">
+
+          aquí empieza lo importante 🩶
+
+        </p>
+
+        <button
+          class="glass-button"
+          id="continueButton"
+        >
+
+          continuar
+
+          <span class="button-arrow">
+            ›
+          </span>
+
+        </button>
+
+      </div>
+
+    </section>
+
+
   </main>
 
-  <div class="transition-layer" id="transitionLayer"></div>
+
+  <!-- TRANSICIÓN -->
+
+  <div
+    class="transition"
+    id="transition"
+  ></div>
 
 
   <script>
 
-    /* =========================
-       MOVIMIENTO DEL FONDO
-    ========================= */
 
-    const cursorLight = document.querySelector(".cursor-light");
+    const scenes = [
 
-    const glowOne = document.querySelector(".glow.one");
-    const glowTwo = document.querySelector(".glow.two");
-    const glowThree = document.querySelector(".glow.three");
+      document.getElementById("scene1"),
 
-    const glass = document.querySelector(".glass");
+      document.getElementById("scene2"),
+
+      document.getElementById("scene3"),
+
+      document.getElementById("scene4"),
+
+      document.getElementById("scene5")
+
+    ];
+
+
+    const transition =
+      document.getElementById("transition");
+
+
+    const continueButton =
+      document.getElementById("continueButton");
+
+
+    let currentScene = 0;
+
+
+    /* CAMBIAR ESCENA */
+
+    function showScene(number) {
+
+      transition.classList.add("active");
+
+
+      setTimeout(() => {
+
+        scenes.forEach(scene => {
+
+          scene.classList.remove("active");
+
+        });
+
+
+        scenes[number].classList.add("active");
+
+
+        currentScene = number;
+
+
+        setTimeout(() => {
+
+          transition.classList.remove("active");
+
+        }, 250);
+
+
+      }, 430);
+
+    }
+
+
+    /* SECUENCIA */
+
+    setTimeout(() => {
+
+      showScene(1);
+
+    }, 2400);
+
+
+    setTimeout(() => {
+
+      showScene(2);
+
+    }, 5000);
+
+
+    setTimeout(() => {
+
+      showScene(3);
+
+    }, 7900);
+
+
+    setTimeout(() => {
+
+      showScene(4);
+
+    }, 11300);
+
+
+    /* BOTÓN */
+
+    continueButton.addEventListener(
+      "click",
+      () => {
+
+        /*
+          AQUÍ PONDREMOS
+          LA SIGUIENTE PARTE
+          DEL REGALO.
+        */
+
+      }
+    );
+
+
+    /* MOVIMIENTO DEL FONDO */
+
+    const cursorLight =
+      document.querySelector(".cursor-light");
+
+
+    const glowOne =
+      document.querySelector(".glow.one");
+
+
+    const glowTwo =
+      document.querySelector(".glow.two");
+
+
+    const glowThree =
+      document.querySelector(".glow.three");
+
 
     let targetX = 0;
+
     let targetY = 0;
 
     let currentX = 0;
+
     let currentY = 0;
 
-    function moveBackground(x, y) {
 
-      const centerX = window.innerWidth / 2;
-      const centerY = window.innerHeight / 2;
+    document.addEventListener(
+      "mousemove",
+      event => {
 
-      targetX = (x - centerX) / centerX;
-      targetY = (y - centerY) / centerY;
-    }
+        const centerX =
+          window.innerWidth / 2;
 
-    document.addEventListener("mousemove", (event) => {
+        const centerY =
+          window.innerHeight / 2;
 
-      moveBackground(event.clientX, event.clientY);
 
-      cursorLight.style.left = event.clientX + "px";
-      cursorLight.style.top = event.clientY + "px";
-    });
+        targetX =
+          (event.clientX - centerX)
+          / centerX;
+
+
+        targetY =
+          (event.clientY - centerY)
+          / centerY;
+
+
+        cursorLight.style.left =
+          event.clientX + "px";
+
+
+        cursorLight.style.top =
+          event.clientY + "px";
+
+      }
+    );
+
 
     function animateBackground() {
 
-      currentX += (targetX - currentX) * 0.045;
-      currentY += (targetY - currentY) * 0.045;
+      currentX +=
+        (targetX - currentX) * .045;
+
+
+      currentY +=
+        (targetY - currentY) * .045;
+
 
       glowOne.style.transform =
-        `translate(${currentX * 28}px, ${currentY * 22}px)`;
+        `translate(
+          ${currentX * 30}px,
+          ${currentY * 24}px
+        )`;
+
 
       glowTwo.style.transform =
-        `translate(${currentX * -22}px, ${currentY * -18}px)`;
+        `translate(
+          ${currentX * -25}px,
+          ${currentY * -20}px
+        )`;
+
 
       glowThree.style.transform =
-        `translate(${currentX * 40}px, ${currentY * 30}px)`;
+        `translate(
+          ${currentX * 40}px,
+          ${currentY * 30}px
+        )`;
 
-      glass.style.setProperty(
-        "--card-x",
-        `${currentX * 5}px`
+
+      requestAnimationFrame(
+        animateBackground
       );
 
-      glass.style.setProperty(
-        "--card-y",
-        `${currentY * 5}px`
-      );
-
-      requestAnimationFrame(animateBackground);
     }
+
 
     animateBackground();
 
 
-    /* =========================
-       MOVIMIENTO EN CELULAR
-    ========================= */
-
-    document.addEventListener("touchmove", (event) => {
-
-      if (!event.touches.length) return;
-
-      const touch = event.touches[0];
-
-      moveBackground(
-        touch.clientX,
-        touch.clientY
-      );
-
-    }, { passive: true });
-
-
-    /* =========================
-       GALLINA
-    ========================= */
-
-    const chicken = document.getElementById("chicken");
-    const speech = document.getElementById("speech");
-    const continueButton = document.getElementById("continueButton");
-    const transitionLayer = document.getElementById("transitionLayer");
-
-    let chickenAttempts = 0;
-
-    const messages = [
-      "presiona aquí",
-      "eh... aquí 😭",
-      "apúrate, no seas terca"
-    ];
-
-    chicken.addEventListener("click", () => {
-
-      chickenAttempts++;
-
-      if (chickenAttempts < 3) {
-
-        const positions = [-45, 50];
-
-        const newPosition =
-          positions[chickenAttempts - 1];
-
-        chicken.style.left =
-          `calc(50% + ${newPosition}px)`;
-
-        speech.textContent =
-          messages[chickenAttempts];
-
-        speech.classList.remove("show");
-
-        setTimeout(() => {
-          speech.classList.add("show");
-        }, 80);
-
-      } else {
-
-        speech.textContent =
-          "por fin.";
-
-        speech.classList.add("show");
-
-        setTimeout(() => {
-
-          transitionLayer.classList.add("active");
-
-        }, 500);
-
-        setTimeout(() => {
-
-          /*
-            Esta primera versión todavía no cambia
-            de pantalla. Aquí después conectaremos
-            la siguiente escena del regalo.
-          */
-
-          transitionLayer.classList.remove("active");
-
-          speech.textContent =
-            "bien. ahora sí.";
-
-        }, 1500);
-      }
-
-    });
-
-
-    /* =========================
-       BOTÓN
-    ========================= */
-
-    continueButton.addEventListener("click", () => {
-
-      transitionLayer.classList.add("active");
-
-      setTimeout(() => {
-
-        speech.textContent =
-          "esto recién empieza.";
-
-        transitionLayer.classList.remove("active");
-
-      }, 900);
-
-    });
-
   </script>
+
 
 </body>
 </html>
