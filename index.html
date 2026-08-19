@@ -1000,3 +1000,604 @@ Mary, espero q tengas un día bien bonito y no solo este día sino siempre, t de
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz Cumpleaños, Mary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #050506;
+    --bg-soft: #0c0c0e;
+    --red: #ff1f4b;
+    --red-deep: #7a0019;
+    --red-glow: #ff3e63;
+    --rose: #ffb3c1;
+    --ink: #f5f5f7;
+    --ink-muted: #9a9aa2;
+    --glass: rgba(255,255,255,0.06);
+    --glass-border: rgba(255,255,255,0.12);
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* ---------- Fondo bokeh ---------- */
+  .bokeh-field{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    overflow:hidden;
+    pointer-events:none;
+  }
+  .orb{
+    position:absolute;
+    border-radius:50%;
+    filter: blur(60px);
+    opacity:0.55;
+    animation: float 18s ease-in-out infinite;
+  }
+  .orb.o1{ width:420px; height:420px; background: radial-gradient(circle, var(--red) 0%, transparent 70%); top:-10%; left:-10%; animation-duration:22s; }
+  .orb.o2{ width:320px; height:320px; background: radial-gradient(circle, var(--red-deep) 0%, transparent 70%); bottom:0%; right:-5%; animation-duration:26s; animation-delay:-4s; }
+  .orb.o3{ width:260px; height:260px; background: radial-gradient(circle, var(--red-glow) 0%, transparent 70%); top:40%; left:60%; animation-duration:20s; animation-delay:-9s; opacity:0.35; }
+  .orb.o4{ width:180px; height:180px; background: radial-gradient(circle, var(--rose) 0%, transparent 70%); top:70%; left:10%; animation-duration:16s; animation-delay:-2s; opacity:0.25; }
+
+  @keyframes float{
+    0%,100%{ transform: translate(0,0) scale(1); }
+    33%{ transform: translate(30px,-40px) scale(1.08); }
+    66%{ transform: translate(-25px,25px) scale(0.95); }
+  }
+
+  /* ---------- Corazones flotantes ---------- */
+  .hearts-layer{
+    position:fixed; inset:0; z-index:1; pointer-events:none; overflow:hidden;
+  }
+  .heart{
+    position:absolute;
+    bottom:-40px;
+    color: var(--red-glow);
+    opacity:0;
+    animation: rise linear infinite;
+    filter: drop-shadow(0 0 6px rgba(255,62,99,0.6));
+  }
+  @keyframes rise{
+    0%{ transform: translateY(0) translateX(0) rotate(0deg); opacity:0; }
+    10%{ opacity:0.8; }
+    90%{ opacity:0.5; }
+    100%{ transform: translateY(-110vh) translateX(20px) rotate(20deg); opacity:0; }
+  }
+
+  /* Efecto de corazones al tocar el botón final */
+  .heart-pop{
+    position:fixed;
+    z-index:5;
+    color: var(--red-glow);
+    filter: drop-shadow(0 0 6px rgba(255,62,99,0.6));
+    animation: popFade 2.5s ease forwards;
+    pointer-events:none;
+  }
+  @keyframes popFade{
+    0%{ opacity:0; transform: scale(0.5) translateY(10px); }
+    15%{ opacity:1; transform: scale(1) translateY(0); }
+    80%{ opacity:1; }
+    100%{ opacity:0; transform: scale(0.9) translateY(-30px); }
+  }
+
+  section{
+    position:relative;
+    z-index:2;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding: 80px 24px;
+    text-align:center;
+  }
+
+  /* ---------- HERO ---------- */
+  .eyebrow{
+    font-size:13px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color: var(--rose);
+    opacity:0.8;
+    margin-bottom:18px;
+    font-weight:500;
+  }
+
+  h1.hero-name{
+    font-family:'Fraunces', serif;
+    font-optical-sizing:auto;
+    font-weight:600;
+    font-size: clamp(64px, 16vw, 160px);
+    line-height:0.95;
+    background: linear-gradient(180deg, #ffffff 0%, var(--rose) 55%, var(--red) 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    letter-spacing:-2px;
+    text-shadow: 0 0 80px rgba(255,31,75,0.25);
+    animation: appear 1.4s cubic-bezier(.16,1,.3,1) both;
+  }
+
+  .hero-sub{
+    margin-top:22px;
+    font-size: clamp(16px,2.4vw,20px);
+    color: var(--ink-muted);
+    max-width:480px;
+    font-weight:300;
+    animation: appear 1.4s cubic-bezier(.16,1,.3,1) 0.2s both;
+  }
+
+  @keyframes appear{
+    from{ opacity:0; transform: translateY(24px); filter: blur(8px); }
+    to{ opacity:1; transform: translateY(0); filter: blur(0); }
+  }
+
+  .scroll-hint{
+    position:absolute;
+    bottom:36px;
+    font-size:12px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color: var(--ink-muted);
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    animation: bob 2.4s ease-in-out infinite;
+  }
+  .scroll-hint .line{ width:1px; height:28px; background:linear-gradient(var(--red), transparent); }
+  @keyframes bob{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(8px); } }
+
+  /* ---------- Glass panel base ---------- */
+  .glass{
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(24px) saturate(140%);
+    -webkit-backdrop-filter: blur(24px) saturate(140%);
+    border-radius: 28px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08);
+  }
+
+  .reveal{
+    opacity:0;
+    transform: translateY(40px);
+    transition: opacity 0.9s cubic-bezier(.16,1,.3,1), transform 0.9s cubic-bezier(.16,1,.3,1);
+  }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  h2.section-title{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size: clamp(32px, 5vw, 52px);
+    margin-bottom:14px;
+    letter-spacing:-1px;
+  }
+  h2.section-title .accent{ color: var(--red-glow); }
+
+  .section-lead{
+    color: var(--ink-muted);
+    max-width:520px;
+    margin: 0 auto 48px;
+    font-size:16px;
+    font-weight:300;
+    line-height:1.6;
+  }
+
+  /* ---------- Countdown ---------- */
+  .countdown-panel{
+    padding: 40px 32px;
+    display:flex;
+    gap: clamp(14px,3vw,32px);
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .count-unit{ min-width:76px; }
+  .count-num{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size: clamp(38px,7vw,64px);
+    color: var(--ink);
+    text-shadow: 0 0 30px rgba(255,31,75,0.35);
+  }
+  .count-label{
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color: var(--ink-muted);
+    margin-top:6px;
+  }
+
+  /* ---------- Galería ---------- */
+  .gallery-track{
+    display:flex;
+    gap:22px;
+    overflow-x:auto;
+    padding: 20px 8vw 30px;
+    scroll-snap-type:x mandatory;
+    width:100%;
+    -webkit-overflow-scrolling:touch;
+  }
+  .gallery-track::-webkit-scrollbar{ height:4px; }
+  .gallery-track::-webkit-scrollbar-thumb{ background: var(--red-deep); border-radius:4px; }
+
+  .photo-card{
+    scroll-snap-align:center;
+    flex: 0 0 min(78vw, 320px);
+    aspect-ratio: 4/5;
+    border-radius:24px;
+    position:relative;
+    overflow:hidden;
+    background: linear-gradient(160deg, #1a0308, #050506 60%);
+    display:flex;
+    align-items:flex-end;
+    padding:18px;
+  }
+  .photo-card img{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    opacity:0.9;
+  }
+  .photo-card .placeholder-txt{
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    color: var(--ink-muted);
+    font-size:13px;
+    text-align:center;
+    padding: 20px;
+    border: 1px dashed var(--glass-border);
+    margin:6px;
+    border-radius:20px;
+  }
+  .photo-caption{
+    position:relative; z-index:2;
+    font-size:13px;
+    color: var(--ink);
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(10px);
+    padding:8px 14px;
+    border-radius:100px;
+    border:1px solid var(--glass-border);
+  }
+
+  /* ---------- Carta ---------- */
+  .letter-panel{
+    max-width:640px;
+    padding: clamp(30px,6vw,64px);
+    text-align:left;
+  }
+  .letter-panel p{
+    font-size: clamp(16px,2.4vw,19px);
+    line-height:1.85;
+    color: #e6e6e9;
+    font-weight:300;
+    margin-bottom:18px;
+  }
+  .letter-signoff{
+    margin-top:30px;
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:20px;
+    color: var(--rose);
+  }
+
+  /* ---------- Badge "primera vez" ---------- */
+  .badge-panel{
+    padding: 46px 36px;
+    max-width:460px;
+  }
+  .badge-icon{
+    font-size:34px;
+    margin-bottom:14px;
+    filter: drop-shadow(0 0 14px rgba(255,31,75,0.6));
+  }
+
+  /* ---------- Finale ---------- */
+  .finale{
+    gap:30px;
+  }
+  .reveal-button{
+    width:130px; height:130px;
+    border-radius:50%;
+    border:none;
+    cursor:pointer;
+    background: radial-gradient(circle at 35% 30%, #ff5577, var(--red) 45%, var(--red-deep) 100%);
+    box-shadow: 0 0 0 0 rgba(255,31,75,0.5), 0 12px 40px rgba(255,31,75,0.35);
+    animation: pulse 2.6s ease-in-out infinite;
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-size:13px; letter-spacing:2px; text-transform:uppercase;
+  }
+  @keyframes pulse{
+    0%,100%{ box-shadow: 0 0 0 0 rgba(255,31,75,0.45), 0 12px 40px rgba(255,31,75,0.35); transform:scale(1); }
+    50%{ box-shadow: 0 0 0 22px rgba(255,31,75,0), 0 12px 40px rgba(255,31,75,0.35); transform:scale(1.04); }
+  }
+  .finale-hint{ color: var(--ink-muted); font-size:14px; letter-spacing:0.5px; margin-top:4px; transition:opacity 0.5s ease; }
+
+  /* ---------- Marcador / scoreboard ---------- */
+  .scoreboard{
+    max-width:480px;
+    padding: 36px 30px;
+    margin-top:34px;
+    opacity:0;
+    transform: translateY(24px) scale(0.94);
+    pointer-events:none;
+    transition: all 0.7s cubic-bezier(.16,1,.3,1);
+  }
+  .scoreboard.show{ opacity:1; transform:translateY(0) scale(1); pointer-events:auto; }
+  .scoreboard-tag{
+    display:inline-block;
+    font-size:12px;
+    letter-spacing:3px;
+    color: var(--red-glow);
+    border: 1px solid rgba(255,31,75,0.4);
+    padding: 5px 14px;
+    border-radius:100px;
+    margin-bottom:16px;
+    text-shadow: 0 0 12px rgba(255,31,75,0.6);
+  }
+  .scoreboard p{
+    font-size: clamp(16px,2.6vw,19px);
+    line-height:1.75;
+    color:#f0f0f2;
+    font-weight:300;
+    white-space: pre-line;
+  }
+
+
+  footer{
+    position:relative; z-index:2;
+    text-align:center;
+    padding: 50px 24px 70px;
+    color: var(--ink-muted);
+    font-size:12px;
+    letter-spacing:1px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bokeh-field">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+  <div class="orb o4"></div>
+</div>
+<div class="hearts-layer" id="heartsLayer"></div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="eyebrow">20 de agosto</div>
+  <h1 class="hero-name">Mary</h1>
+  <p class="hero-sub">Hoy el mundo tiene un motivo más para brillar. Esto es para ti.</p>
+  <div class="scroll-hint"><span>Desliza</span><span class="line"></span></div>
+</section>
+
+<!-- COUNTDOWN -->
+<section id="countdown">
+  <div class="eyebrow reveal">Cuenta regresiva</div>
+  <h2 class="section-title reveal">Falta <span class="accent">muy poco</span></h2>
+  <p class="section-lead reveal">Para que empiece tu día.</p>
+  <div class="countdown-panel glass reveal">
+    <div class="count-unit"><div class="count-num" id="cd-days">00</div><div class="count-label">Días</div></div>
+    <div class="count-unit"><div class="count-num" id="cd-hours">00</div><div class="count-label">Horas</div></div>
+    <div class="count-unit"><div class="count-num" id="cd-mins">00</div><div class="count-label">Min</div></div>
+    <div class="count-unit"><div class="count-num" id="cd-secs">00</div><div class="count-label">Seg</div></div>
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<section id="gallery" style="padding-left:0; padding-right:0;">
+  <div class="eyebrow reveal">Momentos</div>
+  <h2 class="section-title reveal">Nosotras <span class="accent">dos</span></h2>
+  <p class="section-lead reveal">Algunas fotos que quiero guardar contigo.</p>
+
+  <div class="gallery-track reveal">
+    <!-- No importa si tus fotos son .jpg, .jpeg o .png: solo nómbralas 1, 2 y 3 (con la extensión que ya tengan) y ponlas en la carpeta "fotos". La página las encuentra sola. -->
+    <div class="photo-card">
+      <img class="auto-photo" data-name="1" alt="" onerror="this.style.display='none'">
+      <span class="photo-caption">Foto 1</span>
+    </div>
+    <div class="photo-card">
+      <img class="auto-photo" data-name="2" alt="" onerror="this.style.display='none'">
+      <span class="photo-caption">Foto 2</span>
+    </div>
+    <div class="photo-card">
+      <img class="auto-photo" data-name="3" alt="" onerror="this.style.display='none'">
+      <span class="photo-caption">Foto 3</span>
+    </div>
+  </div>
+</section>
+
+<!-- CARTA -->
+<section id="letter">
+  <div class="eyebrow reveal">Para ti</div>
+  <h2 class="section-title reveal">Una carta <span class="accent">corta</span></h2>
+  <div class="letter-panel glass reveal">
+    <p>Vrujini , lleve días pensando cmo empezar esto<br>
+quería poner más fotos, cmo tus fallos en los saques de vbl, pero con lo q paso a mi anterior teléfono, no recupere algunas fotos :c, hoy es tu día, y quería hacer algo distinto, no solo decirte feliz cumple y ya, con to lo q aprendi en la Uni, quise hacerte esto, y oye quítame el castigo 💔</p>
+    <div class="letter-signoff">-Merijane</div>
+  </div>
+</section>
+
+<!-- BADGE PRIMERA VEZ -->
+<section id="badge">
+  <div class="badge-panel glass reveal">
+    <div class="badge-icon">✦</div>
+    <h2 class="section-title" style="font-size:clamp(24px,4vw,32px)">Primera vez que hago esto</h2>
+    <p class="section-lead" style="margin-bottom:0;">Nunca antes le había hecho una página a nadie. Quería que la tuya fuera la primera.</p>
+  </div>
+</section>
+
+<!-- FINALE -->
+<section id="finale" class="finale">
+  <div class="eyebrow reveal">Un último detalle</div>
+  <h2 class="section-title reveal">Descúbrelo <span class="accent">tú misma</span></h2>
+  <button class="reveal-button reveal" id="revealBtn">Toca aquí</button>
+  <div class="finale-hint reveal" id="finaleHint">— tócalo —</div>
+
+  <div class="scoreboard glass" id="scoreboard">
+    <div class="scoreboard-tag">¡ACE!</div>
+    <p>Holaaaaaaa, Feliliz Cumpleañoooss
+Mary, espero q tengas un día bien bonito y no solo este día sino siempre, t deseo lo mejor siempre, espero q la pases increíble tkm 🥳💗</p>
+  </div>
+</section>
+
+<footer>hecho con cariño para Mary · 20 de agosto</footer>
+
+<script>
+  // ---------- Fotos: prueba jpg / jpeg / png / webp sola, sin que tengas que preocuparte por la extensión ----------
+  const exts = ['jpg','jpeg','png','webp','JPG','JPEG','PNG'];
+  document.querySelectorAll('.auto-photo').forEach(img=>{
+    const name = img.dataset.name;
+    let i = 0;
+    function tryNext(){
+      if(i >= exts.length){ img.style.display='none'; return; }
+      img.src = `fotos/${name}.${exts[i]}`;
+      i++;
+    }
+    img.addEventListener('error', tryNext);
+    tryNext();
+  });
+
+  // ---------- Corazones flotantes ----------
+  const heartsLayer = document.getElementById('heartsLayer');
+  function spawnHeart(){
+    const h = document.createElement('div');
+    h.className = 'heart';
+    h.innerHTML = '♥';
+    const size = 10 + Math.random()*18;
+    h.style.left = Math.random()*100 + 'vw';
+    h.style.fontSize = size + 'px';
+    h.style.animationDuration = (10 + Math.random()*10) + 's';
+    heartsLayer.appendChild(h);
+    setTimeout(()=> h.remove(), 20000);
+  }
+  setInterval(spawnHeart, 900);
+  for(let i=0;i<6;i++) setTimeout(spawnHeart, i*300);
+
+  // ---------- Reveal on scroll ----------
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el=> io.observe(el));
+
+  // ---------- Countdown ----------
+  // Cambia el año si hace falta
+  const target = new Date('2026-08-20T00:00:00');
+  function updateCountdown(){
+    const now = new Date();
+    let diff = target - now;
+    if(diff < 0) diff = 0;
+    const d = Math.floor(diff / (1000*60*60*24));
+    const h = Math.floor((diff / (1000*60*60)) % 24);
+    const m = Math.floor((diff / (1000*60)) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+    document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // ---------- Confeti de corazones (usado por el sobre) ----------
+  function burstHearts(x, y){
+    for(let i=0;i<26;i++){
+      const h = document.createElement('div');
+      h.className = 'heart';
+      h.innerHTML = '♥';
+      h.style.left = x + 'px';
+      h.style.bottom = (window.innerHeight - y) + 'px';
+      h.style.fontSize = (12 + Math.random()*18) + 'px';
+      h.style.animation = 'none';
+      h.style.opacity = '1';
+      const angle = Math.random()*Math.PI*2;
+      const dist = 70 + Math.random()*150;
+      const dx = Math.cos(angle)*dist;
+      const dy = Math.sin(angle)*dist;
+      h.animate([
+        { transform:'translate(0,0) scale(0.5)', opacity:1 },
+        { transform:`translate(${dx}px, ${dy - 90}px) scale(1)`, opacity:0 }
+      ], { duration: 1200 + Math.random()*600, easing:'cubic-bezier(.16,1,.3,1)' });
+      document.body.appendChild(h);
+      setTimeout(()=> h.remove(), 1900);
+    }
+  }
+
+  // ---------- Corazones al tocar el botón (tu efecto) ----------
+  function makeHearts() {
+    for (let i = 0; i < 18; i++) {
+      setTimeout(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart-pop");
+
+        const symbols = ["♡", "♥", "💗", "✦"];
+        heart.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.top = (70 + Math.random() * 20) + "vh";
+        heart.style.fontSize = (14 + Math.random() * 14) + "px";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 2500);
+      }, i * 100);
+    }
+  }
+
+  // ---------- Botón final: revela el marcador ----------
+  const revealBtn = document.getElementById('revealBtn');
+  const finaleHint = document.getElementById('finaleHint');
+  const scoreboard = document.getElementById('scoreboard');
+  let served = false;
+
+  revealBtn.addEventListener('click', (e)=>{
+    if(served) return;
+    served = true;
+    makeHearts();
+    finaleHint.style.opacity = '0';
+    revealBtn.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    revealBtn.style.opacity = '0';
+    revealBtn.style.transform = 'scale(0.8)';
+    scoreboard.classList.add('show');
+  });
+
+  // ---------- Parallax suave de las esferas siguiendo el puntero ----------
+  const orbs = document.querySelectorAll('.orb');
+  function parallaxOrbs(clientX, clientY){
+    const cx = clientX / window.innerWidth - 0.5;
+    const cy = clientY / window.innerHeight - 0.5;
+    orbs.forEach((orb, i)=>{
+      const strength = (i+1) * 10;
+      orb.style.marginLeft = (cx * strength) + 'px';
+      orb.style.marginTop = (cy * strength) + 'px';
+    });
+  }
+  window.addEventListener('mousemove', (e)=> parallaxOrbs(e.clientX, e.clientY));
+  window.addEventListener('touchmove', (e)=>{
+    const t = e.touches[0];
+    if(t) parallaxOrbs(t.clientX, t.clientY);
+  }, { passive:true });
+</script>
+
+</body>
+</html>
