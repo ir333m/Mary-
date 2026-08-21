@@ -1601,3 +1601,38 @@ Mary, espero q tengas un día bien bonito y no solo este día sino siempre, t de
 
 </body>
 </html>
+function makeHearts() {
+
+  for (let i = 0; i < 18; i++) {
+
+    setTimeout(() => {
+
+      const heart = document.createElement("div");
+
+      heart.classList.add("heart");
+
+      const symbols = [
+        "♡",
+        "♥",
+        "💗",
+        "✦"
+      ];
+
+      heart.innerHTML =
+        symbols[Math.floor(Math.random() * symbols.length)];
+
+      heart.style.left =
+        Math.random() * 100 + "vw";
+
+      heart.style.top =
+        (70 + Math.random() * 20) + "vh";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 2500);
+
+    }, i * 100);
+  }
+}
