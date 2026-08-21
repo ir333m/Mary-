@@ -1636,3 +1636,504 @@ function makeHearts() {
     }, i * 100);
   }
 }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Para ti ♡</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Georgia, "Times New Roman", serif;
+      overflow-x: hidden;
+      color: white;
+
+      background:
+        radial-gradient(circle at 20% 20%, #5c365e 0%, transparent 35%),
+        radial-gradient(circle at 80% 80%, #30204d 0%, transparent 35%),
+        linear-gradient(135deg, #120d1c, #25152c, #171224);
+    }
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .star {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.7;
+      animation: twinkle 3s infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0%, 100% {
+        opacity: 0.2;
+        transform: scale(0.7);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.5);
+      }
+    }
+
+    .page {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      padding: 30px 18px;
+    }
+
+    .card {
+      width: min(700px, 100%);
+      padding: 35px 25px;
+
+      border-radius: 28px;
+
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+
+      backdrop-filter: blur(15px);
+
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+
+      text-align: center;
+
+      animation: appear 1.2s ease;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.96);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .small {
+      font-size: 14px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      opacity: 0.7;
+
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(38px, 9vw, 72px);
+      font-weight: normal;
+
+      margin-bottom: 15px;
+
+      text-shadow: 0 0 25px rgba(255, 180, 230, 0.3);
+    }
+
+    .subtitle {
+      font-size: 18px;
+      line-height: 1.7;
+      opacity: 0.85;
+
+      margin-bottom: 30px;
+    }
+
+    .photo {
+      width: min(330px, 90%);
+      height: 330px;
+
+      object-fit: cover;
+
+      border-radius: 25px;
+
+      margin: 10px auto 30px;
+
+      display: block;
+
+      border: 2px solid rgba(255, 255, 255, 0.25);
+
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+
+      transition: 0.5s;
+    }
+
+    .photo:hover {
+      transform: scale(1.03) rotate(-1deg);
+    }
+
+    button {
+      border: none;
+
+      padding: 14px 25px;
+
+      border-radius: 999px;
+
+      cursor: pointer;
+
+      color: white;
+
+      font-size: 16px;
+
+      background: linear-gradient(135deg, #b45ca5, #7c4d9e);
+
+      box-shadow: 0 8px 25px rgba(180, 92, 165, 0.3);
+
+      transition: 0.3s;
+
+      margin: 7px;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+
+      box-shadow: 0 12px 30px rgba(180, 92, 165, 0.5);
+    }
+
+    .letter {
+      max-height: 0;
+
+      overflow: hidden;
+
+      opacity: 0;
+
+      transition:
+        max-height 1s ease,
+        opacity 1s ease,
+        margin 1s ease;
+    }
+
+    .letter.open {
+      max-height: 600px;
+
+      opacity: 1;
+
+      margin-top: 25px;
+    }
+
+    .letter-box {
+      padding: 25px;
+
+      border-radius: 20px;
+
+      background: rgba(0, 0, 0, 0.18);
+
+      border: 1px solid rgba(255, 255, 255, 0.1);
+
+      line-height: 1.8;
+
+      font-size: 17px;
+    }
+
+    .typing {
+      min-height: 90px;
+
+      margin-top: 20px;
+
+      font-size: 18px;
+
+      line-height: 1.7;
+
+      opacity: 0.9;
+    }
+
+    .heart {
+      position: fixed;
+
+      pointer-events: none;
+
+      font-size: 22px;
+
+      animation: floatHeart 2.5s ease-out forwards;
+
+      z-index: 10;
+    }
+
+    @keyframes floatHeart {
+      0% {
+        opacity: 1;
+
+        transform:
+          translateY(0)
+          scale(0.7)
+          rotate(0);
+      }
+
+      100% {
+        opacity: 0;
+
+        transform:
+          translateY(-180px)
+          scale(1.4)
+          rotate(25deg);
+      }
+    }
+
+    .footer {
+      margin-top: 30px;
+
+      font-size: 13px;
+
+      opacity: 0.45;
+    }
+
+    @media (max-width: 500px) {
+      .card {
+        padding: 30px 18px;
+      }
+
+      .photo {
+        height: 270px;
+      }
+
+      .subtitle {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="stars" id="stars"></div>
+
+  <main class="page">
+
+    <section class="card">
+
+      <div class="small">
+        un pequeño regalo ♡
+      </div>
+
+      <h1>
+        Para ti
+      </h1>
+
+      <p class="subtitle">
+        Hice esto porque quería darte algo diferente.
+        Algo pequeño, pero hecho con cariño.
+      </p>
+
+      <img
+        src="foto.jpeg"
+        alt="Una foto especial"
+        class="photo"
+      >
+
+      <button onclick="openLetter()">
+        💌 Abrir
+      </button>
+
+      <button onclick="makeHearts()">
+        ♡ Sorpresa
+      </button>
+
+      <div class="letter" id="letter">
+
+        <div class="letter-box">
+
+          <p>
+            Hay personas que llegan a tu vida y,
+            sin darte cuenta, terminan siendo importantes.
+          </p>
+
+          <br>
+
+          <p>
+            No sé exactamente cómo explicar todo lo que
+            quería decir, así que hice esto para que
+            simplemente lo tengas.
+          </p>
+
+          <br>
+
+          <p>
+            Espero que cuando lo veas puedas sonreír
+            aunque sea un poquito. ♡
+          </p>
+
+        </div>
+
+      </div>
+
+      <p class="typing" id="typing"></p>
+
+      <div class="footer">
+        hecho especialmente para ti ✦
+      </div>
+
+    </section>
+
+  </main>
+
+  <script>
+
+    /* ESTRELLAS */
+
+    const stars = document.getElementById("stars");
+
+    for (let i = 0; i < 90; i++) {
+
+      const star = document.createElement("div");
+
+      star.classList.add("star");
+
+      star.style.left = Math.random() * 100 + "%";
+
+      star.style.top = Math.random() * 100 + "%";
+
+      star.style.animationDelay =
+        Math.random() * 3 + "s";
+
+      stars.appendChild(star);
+    }
+
+
+    /* ABRIR CARTA */
+
+    function openLetter() {
+
+      const letter =
+        document.getElementById("letter");
+
+      letter.classList.toggle("open");
+
+      if (letter.classList.contains("open")) {
+        typeMessage();
+      }
+    }
+
+
+    /* TEXTO QUE APARECE POCO A POCO */
+
+    function typeMessage() {
+
+      const text =
+        "Y aunque esto sea solamente una pequeña página, quería que supieras que fue hecha pensando en ti. ♡";
+
+      const element =
+        document.getElementById("typing");
+
+      element.innerHTML = "";
+
+      let i = 0;
+
+      function write() {
+
+        if (i < text.length) {
+
+          element.innerHTML +=
+            text.charAt(i);
+
+          i++;
+
+          setTimeout(write, 45);
+        }
+      }
+
+      write();
+    }
+
+
+    /* SORPRESA DE CORAZONES */
+
+    function makeHearts() {
+
+      for (let i = 0; i < 18; i++) {
+
+        setTimeout(() => {
+
+          const heart =
+            document.createElement("div");
+
+          heart.classList.add("heart");
+
+          const symbols = [
+            "♡",
+            "♥",
+            "💗",
+            "✦"
+          ];
+
+          heart.innerHTML =
+            symbols[
+              Math.floor(
+                Math.random() * symbols.length
+              )
+            ];
+
+          heart.style.left =
+            Math.random() * 100 + "vw";
+
+          heart.style.top =
+            (70 + Math.random() * 20) + "vh";
+
+          document.body.appendChild(heart);
+
+          setTimeout(() => {
+            heart.remove();
+          }, 2500);
+
+        }, i * 100);
+      }
+    }
+
+
+    /* CORAZÓN AL TOCAR LA PANTALLA */
+
+    document.addEventListener(
+      "click",
+      function(e) {
+
+        if (e.target.tagName === "BUTTON") {
+          return;
+        }
+
+        const heart =
+          document.createElement("div");
+
+        heart.classList.add("heart");
+
+        heart.innerHTML = "♡";
+
+        heart.style.left =
+          e.clientX + "px";
+
+        heart.style.top =
+          e.clientY + "px";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 2500);
+
+      }
+    );
+
+  </script>
+
+</body>
+</html>
